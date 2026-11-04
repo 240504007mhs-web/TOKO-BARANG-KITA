@@ -1,15 +1,19 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ElectroTech - Toko Elektronik</title>
+
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background:
@@ -21,262 +25,622 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
 }
-body::before, body::after {
-  content:"";
-  position:fixed;
-  width:300px;height:300px;
-  border-radius:50%;
-  filter:blur(100px);
-  opacity:.22;
-  z-index:-1;
-  pointer-events:none;
-  animation:glow 9s infinite alternate;
+
+/* CAHAYA BACKGROUND */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: .25;
+  z-index: 0;
+  pointer-events: none;
+  animation: glow 9s infinite alternate;
 }
-body::before { background:#2563eb;top:5%;left:-100px; }
-body::after { background:#9333ea;bottom:0;right:-100px;animation-delay:2s; }
+
+body::before {
+  background: #2563eb;
+  top: 5%;
+  left: -100px;
+}
+
+body::after {
+  background: #9333ea;
+  bottom: 0;
+  right: -100px;
+  animation-delay: 2s;
+}
+
 @keyframes glow {
-  from { transform:translate(0,0); }
-  to { transform:translate(50px,35px); }
+  from { transform: translate(0,0) scale(1); }
+  to { transform: translate(50px,35px) scale(1.2); }
 }
-.tech-decoration {
-  position:fixed;
-  pointer-events:none;
-  z-index:0;
-  color:rgba(96,165,250,.35);
-  animation:float 6s ease-in-out infinite;
+
+/* DEKORASI BUNGA, BINTANG, DAN KUPU-KUPU */
+.decoration-layer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
 }
-.tech-1 { top:20%;left:4%;font-size:35px; }
-.tech-2 { top:55%;right:5%;font-size:45px;animation-delay:1s; }
-.tech-3 { bottom:12%;left:12%;font-size:30px;animation-delay:2s; }
-.tech-4 { top:80%;right:25%;font-size:25px;animation-delay:3s; }
-@keyframes float {
-  0%,100% { transform:translateY(0) rotate(0); }
-  50% { transform:translateY(-18px) rotate(12deg); }
+
+.flower-decoration {
+  position: absolute;
+  opacity: .75;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,.5));
+  animation: flowerFloat 7s ease-in-out infinite;
 }
+
+.flower-1 { top: 15%; left: 4%; font-size: 38px; }
+.flower-2 { top: 42%; right: 4%; font-size: 34px; animation-delay: 1s; }
+.flower-3 { top: 72%; left: 7%; font-size: 40px; animation-delay: 2s; }
+.flower-4 { top: 85%; right: 12%; font-size: 35px; animation-delay: 3s; }
+.flower-5 { top: 55%; left: 48%; font-size: 25px; animation-delay: 1.5s; }
+
+@keyframes flowerFloat {
+  0%,100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: .45;
+  }
+  50% {
+    transform: translateY(-22px) rotate(20deg);
+    opacity: 1;
+  }
+}
+
+/* BINTANG BERKILAU */
+.star-decoration {
+  position: absolute;
+  color: #bfdbfe;
+  text-shadow:
+    0 0 8px #60a5fa,
+    0 0 18px #93c5fd,
+    0 0 30px #c4b5fd;
+  animation: starTwinkle 3s ease-in-out infinite;
+}
+
+.star-1 { top: 20%; left: 22%; font-size: 28px; }
+.star-2 { top: 60%; right: 18%; font-size: 35px; animation-delay: .8s; }
+.star-3 { top: 85%; left: 35%; font-size: 22px; animation-delay: 1.5s; }
+.star-4 { top: 35%; right: 35%; font-size: 18px; animation-delay: 2s; }
+.star-5 { top: 75%; right: 42%; font-size: 25px; animation-delay: .5s; }
+
+@keyframes starTwinkle {
+  0%,100% {
+    opacity: .25;
+    transform: scale(.7) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.35) rotate(45deg);
+  }
+}
+
+/* KUPU-KUPU TERBANG */
+.butterfly {
+  position: absolute;
+  font-size: 30px;
+  filter: drop-shadow(0 0 10px rgba(147,197,253,.9));
+  animation: butterflyFly 12s ease-in-out infinite;
+}
+
+.butterfly-1 {
+  top: 25%;
+  left: -5%;
+  animation-duration: 16s;
+}
+
+.butterfly-2 {
+  top: 65%;
+  right: -5%;
+  font-size: 26px;
+  animation-duration: 19s;
+  animation-delay: 2s;
+}
+
+.butterfly-3 {
+  top: 48%;
+  left: -5%;
+  font-size: 22px;
+  animation-duration: 22s;
+  animation-delay: 4s;
+}
+
+@keyframes butterflyFly {
+  0% {
+    transform: translate(0,0) rotate(0deg);
+    opacity: 0;
+  }
+  10% { opacity: .9; }
+  25% {
+    transform: translate(25vw,-45px) rotate(15deg);
+  }
+  50% {
+    transform: translate(50vw,35px) rotate(-15deg);
+  }
+  75% {
+    transform: translate(75vw,-35px) rotate(15deg);
+  }
+  90% { opacity: .9; }
+  100% {
+    transform: translate(110vw,15px) rotate(-10deg);
+    opacity: 0;
+  }
+}
+
+/* PARTIKEL CAHAYA KECIL */
+.light-particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #93c5fd;
+  box-shadow: 0 0 12px 4px rgba(96,165,250,.6);
+  animation: particleMove 6s ease-in-out infinite;
+}
+
+.particle-1 { top: 30%; left: 12%; }
+.particle-2 { top: 50%; right: 12%; animation-delay: 1s; }
+.particle-3 { top: 80%; left: 60%; animation-delay: 2s; }
+.particle-4 { top: 15%; right: 30%; animation-delay: 3s; }
+
+@keyframes particleMove {
+  0%,100% {
+    transform: translateY(0) scale(.6);
+    opacity: .2;
+  }
+  50% {
+    transform: translateY(-25px) scale(1.5);
+    opacity: 1;
+  }
+}
+
+/* NAVBAR */
 header {
-  background:rgba(8,20,39,.88)!important;
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid rgba(96,165,250,.2);
+  background: rgba(8,20,39,.90) !important;
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(96,165,250,.2);
 }
+
+/* BANNER UTAMA */
 .hero {
-  position:relative;
-  overflow:hidden;
-  background:linear-gradient(120deg,#102c55,#174ea6,#4338a5);
-  border:1px solid rgba(147,197,253,.25);
-  box-shadow:0 20px 50px rgba(0,0,0,.25);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(120deg,#102c55,#174ea6,#4338a5);
+  border: 1px solid rgba(147,197,253,.25);
+  box-shadow: 0 20px 50px rgba(0,0,0,.25);
 }
+
 .hero::before {
-  content:"⚡";
-  position:absolute;
-  right:8%;top:5px;
-  font-size:130px;
-  opacity:.12;
-  transform:rotate(15deg);
+  content: "⚡";
+  position: absolute;
+  right: 8%;
+  top: 5px;
+  font-size: 130px;
+  opacity: .12;
+  transform: rotate(15deg);
 }
+
 .hero::after {
-  content:"✦";
-  position:absolute;
-  right:35%;bottom:5px;
-  font-size:70px;
-  color:#93c5fd;
-  opacity:.25;
+  content: "✦";
+  position: absolute;
+  right: 35%;
+  bottom: 5px;
+  font-size: 70px;
+  color: #93c5fd;
+  opacity: .25;
+  animation: starTwinkle 4s infinite;
 }
+
+/* KARTU GLASS */
 .glass {
-  background:rgba(15,30,54,.75);
-  border:1px solid rgba(96,165,250,.2);
-  backdrop-filter:blur(15px);
-  border-radius:22px;
+  background: rgba(15,30,54,.75);
+  border: 1px solid rgba(96,165,250,.2);
+  backdrop-filter: blur(15px);
+  border-radius: 22px;
 }
+
+/* CAROUSEL */
 .carousel-wrapper {
-  position:relative;
-  padding:15px 0 30px;
-  z-index:1;
+  position: relative;
+  padding: 15px 0 30px;
+  z-index: 2;
 }
+
 #product-grid {
-  display:flex;
-  gap:22px;
-  overflow-x:auto;
-  scroll-behavior:smooth;
-  scroll-snap-type:x mandatory;
-  padding:15px 8px 25px;
-  scrollbar-width:none;
+  display: flex;
+  gap: 22px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  padding: 15px 8px 25px;
+  scrollbar-width: none;
 }
-#product-grid::-webkit-scrollbar { display:none; }
+
+#product-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* KARTU PRODUK */
 #product-grid > div {
-  flex:0 0 calc(33.333% - 15px);
-  min-width:260px;
-  background:linear-gradient(145deg,#142b49,#10213a);
-  border:1px solid rgba(96,165,250,.25);
-  border-radius:22px;
-  overflow:hidden;
-  box-shadow:0 12px 30px rgba(0,0,0,.2);
-  scroll-snap-align:center;
-  transition:.3s;
+  flex: 0 0 calc(33.333% - 15px);
+  min-width: 260px;
+  background: linear-gradient(145deg,#142b49,#10213a);
+  border: 1px solid rgba(96,165,250,.25);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0,0,0,.2);
+  scroll-snap-align: center;
+  transition: .3s;
 }
+
 #product-grid > div:hover {
-  transform:translateY(-7px);
-  border-color:#60a5fa;
-  box-shadow:0 18px 35px rgba(37,99,235,.2);
+  transform: translateY(-7px);
+  border-color: #60a5fa;
+  box-shadow: 0 18px 35px rgba(37,99,235,.2);
 }
+
 #product-grid > div > img {
-  width:100%;height:220px;
-  object-fit:contain;
-  padding:15px;
-  background:linear-gradient(135deg,#e0f2fe,#dbeafe,#ede9fe);
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  padding: 15px;
+  background: linear-gradient(135deg,#e0f2fe,#dbeafe,#ede9fe);
 }
+
 #product-grid span {
-  background:rgba(59,130,246,.15);
-  color:#93c5fd;
+  background: rgba(59,130,246,.15);
+  color: #93c5fd;
 }
-#product-grid h4 { color:#f8fafc; }
-#product-grid p { color:#a9bad0; }
-#product-grid .font-extrabold { color:#60a5fa; }
+
+#product-grid h4 { color: #f8fafc; }
+#product-grid p { color: #a9bad0; }
+#product-grid .font-extrabold { color: #60a5fa; }
+
 #product-grid button {
-  background:linear-gradient(135deg,#2563eb,#7c3aed);
-  color:white;
-  transition:.3s;
+  background: linear-gradient(135deg,#2563eb,#7c3aed);
+  color: white;
+  transition: .3s;
 }
+
 #product-grid button:hover {
-  transform:translateY(-2px);
-  filter:brightness(1.15);
+  transform: translateY(-2px);
+  filter: brightness(1.15);
 }
+
+/* PANAH CAROUSEL */
 .carousel-btn {
-  position:absolute;top:45%;transform:translateY(-50%);
-  z-index:10;width:45px;height:45px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  background:#172f50;color:#93c5fd;font-size:25px;
-  border:1px solid rgba(96,165,250,.4);
-  box-shadow:0 5px 20px rgba(0,0,0,.25);
-  cursor:pointer;
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #172f50;
+  color: #93c5fd;
+  font-size: 25px;
+  border: 1px solid rgba(96,165,250,.4);
+  box-shadow: 0 5px 20px rgba(0,0,0,.25);
+  cursor: pointer;
 }
-.carousel-btn:hover { background:#2563eb;color:white; }
-.carousel-prev { left:-12px; }
-.carousel-next { right:-12px; }
+
+.carousel-btn:hover {
+  background: #2563eb;
+  color: white;
+}
+
+.carousel-prev { left: -12px; }
+.carousel-next { right: -12px; }
+
+/* INDIKATOR */
 .carousel-indicators {
-  display:flex;justify-content:center;gap:9px;margin-top:5px;
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 5px;
 }
+
 .carousel-dot {
-  width:9px;height:9px;border:0;border-radius:20px;
-  background:#475569;cursor:pointer;transition:.3s;
+  width: 9px;
+  height: 9px;
+  border: 0;
+  border-radius: 20px;
+  background: #475569;
+  cursor: pointer;
+  transition: .3s;
 }
-.carousel-dot.active { width:25px;background:#60a5fa; }
+
+.carousel-dot.active {
+  width: 25px;
+  background: #60a5fa;
+}
+
+/* SOSIAL MEDIA */
 .social-floating {
-  position:fixed;right:20px;bottom:22px;
-  display:flex;flex-direction:column;gap:12px;z-index:40;
+  position: fixed;
+  right: 20px;
+  bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 40;
 }
+
 .social-floating a {
-  width:50px;height:50px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  color:white;box-shadow:0 6px 20px rgba(0,0,0,.3);
-  transition:.3s;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 6px 20px rgba(0,0,0,.3);
+  transition: .3s;
 }
-.social-floating a:hover { transform:scale(1.12); }
-.social-wa { background:#16a34a; }
-.social-ig { background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5); }
+
+.social-floating a:hover {
+  transform: scale(1.12);
+}
+
+.social-wa { background: #16a34a; }
+
+.social-ig {
+  background: linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);
+}
+
+/* FOOTER */
 footer {
-  background:rgba(8,20,39,.9)!important;
-  border-top:1px solid rgba(96,165,250,.2);
+  background: rgba(8,20,39,.9) !important;
+  border-top: 1px solid rgba(96,165,250,.2);
 }
+
+/* MODAL LOGIN */
 .modal-bg {
-  background:rgba(0,0,0,.78);
-  backdrop-filter:blur(7px);
+  background: rgba(0,0,0,.78);
+  backdrop-filter: blur(7px);
 }
+
 .login-panel {
-  background:linear-gradient(145deg,#122b4b,#0b1a30);
-  border:1px solid rgba(96,165,250,.35);
-  box-shadow:0 25px 80px rgba(0,0,0,.5);
+  background: linear-gradient(145deg,#122b4b,#0b1a30);
+  border: 1px solid rgba(96,165,250,.35);
+  box-shadow: 0 25px 80px rgba(0,0,0,.5);
 }
+
 .form-input {
-  width:100%;padding:12px 14px;border-radius:10px;
-  background:#08172a;border:1px solid #334b6b;
-  color:white;outline:none;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #08172a;
+  border: 1px solid #334b6b;
+  color: white;
+  outline: none;
 }
-.form-input:focus { border-color:#60a5fa;box-shadow:0 0 0 2px rgba(59,130,246,.15); }
+
+.form-input:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 2px rgba(59,130,246,.15);
+}
+
 .primary-btn {
-  background:linear-gradient(120deg,#2563eb,#7c3aed);
-  color:white;font-weight:700;border-radius:11px;
-  padding:12px;width:100%;transition:.3s;
+  background: linear-gradient(120deg,#2563eb,#7c3aed);
+  color: white;
+  font-weight: 700;
+  border-radius: 11px;
+  padding: 12px;
+  width: 100%;
+  transition: .3s;
 }
-.primary-btn:hover { filter:brightness(1.15);transform:translateY(-1px); }
-.cart-panel { background:#10213a;color:#e5e7eb; }
+
+.primary-btn:hover {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+}
+
+.cart-panel {
+  background: #10213a;
+  color: #e5e7eb;
+}
+
+/* RESPONSIVE */
 @media(max-width:900px) {
-  #product-grid > div { flex:0 0 calc(50% - 11px); }
+  #product-grid > div {
+    flex: 0 0 calc(50% - 11px);
+  }
 }
+
 @media(max-width:640px) {
-  #product-grid > div { flex:0 0 85%;min-width:250px; }
-  #product-grid > div > img { height:200px; }
-  .carousel-btn { width:36px;height:36px;font-size:20px; }
-  .carousel-prev { left:-5px; }
-  .carousel-next { right:-5px; }
-  .hero::before { font-size:80px; }
-  .social-floating { right:12px;bottom:15px; }
-  .social-floating a { width:44px;height:44px; }
+  #product-grid > div {
+    flex: 0 0 85%;
+    min-width: 250px;
+  }
+
+  #product-grid > div > img {
+    height: 200px;
+  }
+
+  .carousel-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+
+  .carousel-prev { left: -5px; }
+  .carousel-next { right: -5px; }
+
+  .hero::before { font-size: 80px; }
+
+  .social-floating {
+    right: 12px;
+    bottom: 15px;
+  }
+
+  .social-floating a {
+    width: 44px;
+    height: 44px;
+  }
+
+  .flower-decoration {
+    font-size: 25px;
+  }
+
+  .butterfly {
+    font-size: 22px;
+  }
 }
+
+/* MENGHORMATI PENGATURAN ANIMASI PERANGKAT */
 @media(prefers-reduced-motion:reduce) {
-  *,*::before,*::after { animation:none!important;scroll-behavior:auto!important; }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
 }
 </style>
 </head>
 
 <body class="min-h-screen flex flex-col">
 
-<div class="tech-decoration tech-1">✦</div>
-<div class="tech-decoration tech-2">⌘</div>
-<div class="tech-decoration tech-3">⚡</div>
-<div class="tech-decoration tech-4">✧</div>
+<!-- LAPISAN DEKORASI -->
+<div class="decoration-layer">
+
+  <!-- BUNGA -->
+  <div class="flower-decoration flower-1">🌸</div>
+  <div class="flower-decoration flower-2">🌷</div>
+  <div class="flower-decoration flower-3">🌺</div>
+  <div class="flower-decoration flower-4">🌼</div>
+  <div class="flower-decoration flower-5">💮</div>
+
+  <!-- BINTANG -->
+  <div class="star-decoration star-1">✦</div>
+  <div class="star-decoration star-2">✧</div>
+  <div class="star-decoration star-3">✦</div>
+  <div class="star-decoration star-4">✧</div>
+  <div class="star-decoration star-5">✦</div>
+
+  <!-- KUPU-KUPU -->
+  <div class="butterfly butterfly-1">🦋</div>
+  <div class="butterfly butterfly-2">🦋</div>
+  <div class="butterfly butterfly-3">🦋</div>
+
+  <!-- CAHAYA KECIL -->
+  <div class="light-particle particle-1"></div>
+  <div class="light-particle particle-2"></div>
+  <div class="light-particle particle-3"></div>
+  <div class="light-particle particle-4"></div>
+
+</div>
 
 <!-- HALAMAN LOGIN -->
 <div id="login-screen" class="fixed inset-0 z-50 modal-bg flex items-center justify-center p-4">
+
   <div class="login-panel rounded-3xl w-full max-w-md p-7">
+
     <div class="text-center mb-6">
       <div class="text-5xl mb-3">⚡</div>
       <h1 class="text-2xl font-extrabold text-white">ElectroTech</h1>
-      <p class="text-blue-200 text-sm mt-2">Masuk untuk mulai berbelanja elektronik</p>
+      <p class="text-blue-200 text-sm mt-2">
+        Masuk untuk mulai berbelanja elektronik
+      </p>
     </div>
 
     <div class="flex gap-2 mb-5">
-      <button id="login-tab" onclick="showAuth('login')" class="primary-btn">Login</button>
-      <button id="register-tab" onclick="showAuth('register')" class="primary-btn opacity-50">Daftar</button>
+      <button id="login-tab" onclick="showAuth('login')" class="primary-btn">
+        Login
+      </button>
+
+      <button id="register-tab" onclick="showAuth('register')" class="primary-btn opacity-50">
+        Daftar
+      </button>
     </div>
 
+    <!-- FORM LOGIN -->
     <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
+
       <div>
         <label class="text-sm text-blue-100 block mb-1">Email</label>
-        <input id="login-email" type="email" class="form-input" placeholder="Masukkan email" required>
+        <input id="login-email" type="email"
+          class="form-input"
+          placeholder="Masukkan email"
+          required>
       </div>
+
       <div>
         <label class="text-sm text-blue-100 block mb-1">Password</label>
-        <input id="login-password" type="password" class="form-input" placeholder="Masukkan password" required>
+        <input id="login-password" type="password"
+          class="form-input"
+          placeholder="Masukkan password"
+          required>
       </div>
-      <button class="primary-btn" type="submit">Masuk Sekarang →</button>
+
+      <button class="primary-btn" type="submit">
+        Masuk Sekarang →
+      </button>
+
     </form>
 
+    <!-- FORM DAFTAR -->
     <form id="register-form" onsubmit="handleRegister(event)" class="space-y-4 hidden">
+
       <div>
         <label class="text-sm text-blue-100 block mb-1">Nama Lengkap</label>
-        <input id="register-name" class="form-input" placeholder="Nama lengkap" required>
+        <input id="register-name"
+          class="form-input"
+          placeholder="Nama lengkap"
+          required>
       </div>
+
       <div>
         <label class="text-sm text-blue-100 block mb-1">Email</label>
-        <input id="register-email" type="email" class="form-input" placeholder="Email aktif" required>
+        <input id="register-email"
+          type="email"
+          class="form-input"
+          placeholder="Email aktif"
+          required>
       </div>
+
       <div>
         <label class="text-sm text-blue-100 block mb-1">Password</label>
-        <input id="register-password" type="password" minlength="6" class="form-input" placeholder="Minimal 6 karakter" required>
+        <input id="register-password"
+          type="password"
+          minlength="6"
+          class="form-input"
+          placeholder="Minimal 6 karakter"
+          required>
       </div>
-      <button class="primary-btn" type="submit">Buat Akun</button>
+
+      <button class="primary-btn" type="submit">
+        Buat Akun
+      </button>
+
     </form>
 
     <p id="auth-message" class="text-center text-sm mt-4 text-red-300"></p>
-    <p class="text-xs text-slate-400 text-center mt-5">Dengan masuk, Anda dapat menggunakan katalog dan keranjang belanja.</p>
+
+    <p class="text-xs text-slate-400 text-center mt-5">
+      Dengan masuk, Anda dapat menggunakan katalog dan keranjang belanja.
+    </p>
+
   </div>
 </div>
 
 <!-- NAVBAR -->
 <header class="sticky top-0 z-20 shadow-lg">
+
   <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center gap-3">
+
     <div class="flex items-center gap-2">
       <span class="text-3xl">⚡</span>
+
       <div>
         <h1 class="text-xl font-extrabold text-white">ElectroTech</h1>
         <p class="text-xs text-blue-300">Electronics Store</p>
@@ -284,12 +648,24 @@ footer {
     </div>
 
     <div class="flex items-center gap-3">
+
       <span id="user-greeting" class="hidden sm:block text-sm text-blue-200"></span>
-      <button onclick="toggleCart()" class="relative p-3 bg-blue-500/20 text-blue-200 rounded-full hover:bg-blue-500/40">
+
+      <button onclick="toggleCart()"
+        class="relative p-3 bg-blue-500/20 text-blue-200 rounded-full hover:bg-blue-500/40">
         🛒
-        <span id="cart-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+
+        <span id="cart-count"
+          class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+          0
+        </span>
       </button>
-      <button onclick="logout()" class="text-xs sm:text-sm bg-slate-700 hover:bg-red-600 px-3 py-2 rounded-lg">Keluar</button>
+
+      <button onclick="logout()"
+        class="text-xs sm:text-sm bg-slate-700 hover:bg-red-600 px-3 py-2 rounded-lg">
+        Keluar
+      </button>
+
     </div>
   </div>
 </header>
@@ -297,37 +673,72 @@ footer {
 <!-- KONTEN UTAMA -->
 <main class="max-w-6xl mx-auto px-4 py-8 flex-1 w-full">
 
+  <!-- BANNER -->
   <section class="hero rounded-3xl p-7 md:p-12 mb-9">
+
     <div class="relative z-10 max-w-2xl">
-      <span class="inline-block text-xs font-bold tracking-widest bg-blue-400/20 text-blue-200 px-4 py-2 rounded-full mb-4">WELCOME TO ELECTROTECH</span>
+
+      <span class="inline-block text-xs font-bold tracking-widest bg-blue-400/20 text-blue-200 px-4 py-2 rounded-full mb-4">
+        WELCOME TO ELECTROTECH
+      </span>
+
       <h2 class="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-4">
         Temukan Teknologi Terbaik untuk Kebutuhanmu
       </h2>
+
       <p class="text-blue-100 text-sm md:text-base leading-relaxed">
         Pilihan barang elektronik berkualitas dengan harga menarik. Belanja mudah, aman, dan terhubung langsung ke WhatsApp.
       </p>
-      <a href="#katalog" class="inline-block mt-6 bg-white text-blue-800 font-bold px-6 py-3 rounded-xl hover:bg-blue-100 transition">Lihat Produk ↓</a>
+
+      <a href="#katalog"
+        class="inline-block mt-6 bg-white text-blue-800 font-bold px-6 py-3 rounded-xl hover:bg-blue-100 transition">
+        Lihat Produk ↓
+      </a>
+
     </div>
   </section>
 
-  <section class="mb-6">
+  <!-- JUDUL KATALOG -->
+  <section id="katalog" class="mb-6">
+
     <div class="flex items-center gap-3 mb-2">
       <span class="text-2xl">💻</span>
-      <h3 class="text-2xl font-extrabold text-white">Katalog Elektronik</h3>
+      <h3 class="text-2xl font-extrabold text-white">
+        Katalog Elektronik
+      </h3>
     </div>
-    <p class="text-sm text-blue-200">Jelajahi berbagai produk elektronik pilihan kami.</p>
+
+    <p class="text-sm text-blue-200">
+      Jelajahi berbagai produk elektronik pilihan kami.
+    </p>
+
   </section>
 
+  <!-- LOADING -->
   <div id="product-loading" class="text-center py-16 text-blue-200">
     <div class="text-4xl mb-3 animate-pulse">⚙️</div>
     <p>Memuat katalog produk dari Google Sheets...</p>
   </div>
 
+  <!-- CAROUSEL PRODUK -->
   <div id="carousel-section" class="carousel-wrapper hidden">
-    <button class="carousel-btn carousel-prev" onclick="moveCarousel(-1)" aria-label="Produk sebelumnya">❮</button>
+
+    <button class="carousel-btn carousel-prev"
+      onclick="moveCarousel(-1)"
+      aria-label="Produk sebelumnya">
+      ❮
+    </button>
+
     <div id="product-grid"></div>
-    <button class="carousel-btn carousel-next" onclick="moveCarousel(1)" aria-label="Produk berikutnya">❯</button>
+
+    <button class="carousel-btn carousel-next"
+      onclick="moveCarousel(1)"
+      aria-label="Produk berikutnya">
+      ❯
+    </button>
+
     <div id="carousel-indicators" class="carousel-indicators"></div>
+
   </div>
 
 </main>
@@ -335,65 +746,126 @@ footer {
 <!-- FOOTER -->
 <footer class="py-7 text-center text-xs text-slate-400">
   <p>© 2026 ElectroTech. All rights reserved.</p>
-  <p class="mt-2 text-blue-300 font-semibold">Your Trusted Electronics Store ⚡</p>
+  <p class="mt-2 text-blue-300 font-semibold">
+    Your Trusted Electronics Store ⚡
+  </p>
 </footer>
 
 <!-- SOSIAL MEDIA -->
 <div class="social-floating">
-  <a href="https://wa.me/6287844263501" target="_blank" rel="noopener noreferrer" class="social-wa" title="WhatsApp">
+
+  <a href="https://wa.me/6287844263501"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="social-wa"
+    title="WhatsApp"
+    aria-label="WhatsApp">
+
     <svg viewBox="0 0 32 32" width="26" height="26" fill="currentColor">
       <path d="M16 .5A15.4 15.4 0 0 0 2.8 23.8L.7 31.5l7.9-2.1A15.5 15.5 0 1 0 16 .5zm0 28.2a12.7 12.7 0 0 1-6.5-1.8l-.5-.3-4.7 1.2 1.3-4.6-.3-.5A12.7 12.7 0 1 1 16 28.7z"/>
     </svg>
+
   </a>
-  <a href="https://www.instagram.com/saufiani150/" target="_blank" rel="noopener noreferrer" class="social-ig" title="Instagram">
+
+  <a href="https://www.instagram.com/saufiani150/"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="social-ig"
+    title="Instagram"
+    aria-label="Instagram">
+
     <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2">
       <rect x="3" y="3" width="18" height="18" rx="5"/>
       <circle cx="12" cy="12" r="4"/>
       <circle cx="18" cy="6" r="1" fill="currentColor" stroke="none"/>
     </svg>
+
   </a>
+
 </div>
 
 <!-- MODAL KERANJANG -->
 <div id="cart-modal" class="fixed inset-0 bg-black/70 z-40 hidden justify-end">
+
   <div class="cart-panel w-full max-w-md h-full flex flex-col p-6 shadow-2xl overflow-y-auto">
+
     <div class="flex justify-between items-center pb-4 border-b border-slate-600">
-      <h4 class="text-lg font-bold text-white">🛒 Keranjang Belanja</h4>
-      <button onclick="toggleCart()" class="text-slate-300 text-2xl">&times;</button>
+
+      <h4 class="text-lg font-bold text-white">
+        🛒 Keranjang Belanja
+      </h4>
+
+      <button onclick="toggleCart()" class="text-slate-300 text-2xl">
+        &times;
+      </button>
+
     </div>
 
     <div id="cart-items" class="flex-1 py-4 space-y-3"></div>
 
     <div class="border-t border-slate-600 pt-4 space-y-4">
+
       <div class="flex justify-between text-lg font-bold">
         <span>Total Pembayaran:</span>
         <span id="cart-total" class="text-blue-400">Rp 0</span>
       </div>
 
+      <!-- FORM CHECKOUT -->
       <form id="checkout-form" onsubmit="handleCheckout(event)" class="space-y-3">
+
         <div>
-          <label class="block text-xs font-semibold text-blue-200 mb-1">Nama Lengkap Pembeli</label>
-          <input type="text" id="cust-name" required class="form-input" placeholder="Nama lengkap">
+          <label class="block text-xs font-semibold text-blue-200 mb-1">
+            Nama Lengkap Pembeli
+          </label>
+
+          <input type="text"
+            id="cust-name"
+            required
+            class="form-input"
+            placeholder="Nama lengkap">
         </div>
+
         <div>
-          <label class="block text-xs font-semibold text-blue-200 mb-1">Nomor WhatsApp Aktif</label>
-          <input type="tel" id="cust-phone" required class="form-input" placeholder="081234567890">
+          <label class="block text-xs font-semibold text-blue-200 mb-1">
+            Nomor WhatsApp Aktif
+          </label>
+
+          <input type="tel"
+            id="cust-phone"
+            required
+            class="form-input"
+            placeholder="081234567890">
         </div>
+
         <div>
-          <label class="block text-xs font-semibold text-blue-200 mb-1">Alamat Lengkap Pengiriman</label>
-          <textarea id="cust-address" required class="form-input" rows="2" placeholder="Alamat lengkap"></textarea>
+          <label class="block text-xs font-semibold text-blue-200 mb-1">
+            Alamat Lengkap Pengiriman
+          </label>
+
+          <textarea id="cust-address"
+            required
+            class="form-input"
+            rows="2"
+            placeholder="Alamat lengkap"></textarea>
         </div>
-        <button type="submit" id="btn-submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition">
+
+        <button type="submit"
+          id="btn-submit"
+          class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition">
           Beli Sekarang via WhatsApp 📲
         </button>
+
       </form>
     </div>
   </div>
 </div>
 
+<!-- JAVASCRIPT -->
 <script>
+
 // KONFIGURASI GOOGLE APPS SCRIPT
 const API_URL = "https://script.google.com/macros/s/AKfycbwmtxsue4rnttyIQACXGMBZYf1GKIXMg-5NWrkqjjVx6V_SgpGKgT_STfJ0Mad38FV5/exec";
+
 const WA_ADMIN = "6287844263501";
 
 // DATA
@@ -408,48 +880,89 @@ function getAccounts() {
   return JSON.parse(localStorage.getItem("electrotech_accounts") || "[]");
 }
 
+// PINDAH TAB LOGIN DAN DAFTAR
 function showAuth(mode) {
+
   authMode = mode;
+
   document.getElementById("login-form").classList.toggle("hidden", mode !== "login");
+
   document.getElementById("register-form").classList.toggle("hidden", mode !== "register");
+
   document.getElementById("login-tab").classList.toggle("opacity-50", mode !== "login");
+
   document.getElementById("register-tab").classList.toggle("opacity-50", mode !== "register");
-  document.getElementById("auth-message").innerText = "";
+
+  const message = document.getElementById("auth-message");
+
+  message.innerText = "";
+  message.className = "text-center text-sm mt-4 text-red-300";
 }
 
+// PENDAFTARAN AKUN
 function handleRegister(e) {
+
   e.preventDefault();
 
   const name = document.getElementById("register-name").value.trim();
+
   const email = document.getElementById("register-email").value.trim().toLowerCase();
+
   const password = document.getElementById("register-password").value;
 
   const accounts = getAccounts();
 
+  const message = document.getElementById("auth-message");
+
   if (accounts.some(a => a.email === email)) {
-    document.getElementById("auth-message").innerText = "Email sudah terdaftar.";
+
+    message.innerText = "Email sudah terdaftar.";
     return;
+
   }
 
-  accounts.push({ name, email, password });
+  accounts.push({
+    name,
+    email,
+    password
+  });
+
   localStorage.setItem("electrotech_accounts", JSON.stringify(accounts));
 
-  document.getElementById("auth-message").className = "text-center text-sm mt-4 text-green-300";
-  document.getElementById("auth-message").innerText = "Pendaftaran berhasil. Silakan login.";
+  message.className = "text-center text-sm mt-4 text-green-300";
+
+  message.innerText = "Pendaftaran berhasil. Silakan login.";
+
   document.getElementById("register-form").reset();
+
   showAuth("login");
+
+  message.className = "text-center text-sm mt-4 text-green-300";
+
+  message.innerText = "Pendaftaran berhasil. Silakan login.";
+
 }
 
+// LOGIN
 function handleLogin(e) {
+
   e.preventDefault();
 
   const email = document.getElementById("login-email").value.trim().toLowerCase();
+
   const password = document.getElementById("login-password").value;
-  const account = getAccounts().find(a => a.email === email && a.password === password);
+
+  const account = getAccounts().find(a =>
+    a.email === email && a.password === password
+  );
 
   if (!account) {
-    document.getElementById("auth-message").innerText = "Email atau password salah. Silakan daftar terlebih dahulu.";
+
+    document.getElementById("auth-message").innerText =
+      "Email atau password salah. Silakan daftar terlebih dahulu.";
+
     return;
+
   }
 
   localStorage.setItem("electrotech_session", JSON.stringify({
@@ -458,301 +971,522 @@ function handleLogin(e) {
   }));
 
   enterStore(account);
+
 }
 
+// MASUK KE TOKO
 function enterStore(account) {
+
   document.getElementById("login-screen").classList.add("hidden");
-  document.getElementById("user-greeting").innerText = "Halo, " + account.name;
+
+  document.getElementById("user-greeting").innerText =
+    "Halo, " + account.name;
+
   document.getElementById("user-greeting").classList.remove("hidden");
+
   document.getElementById("cust-name").value = account.name;
+
 }
 
+// LOGOUT
 function logout() {
+
   localStorage.removeItem("electrotech_session");
+
   cart = [];
+
   updateCartUI();
+
   stopCarousel();
+
   document.getElementById("login-screen").classList.remove("hidden");
+
   document.getElementById("user-greeting").classList.add("hidden");
+
   showAuth("login");
+
 }
 
+// CEK SESSION
 function checkSession() {
-  const session = JSON.parse(localStorage.getItem("electrotech_session") || "null");
-  if (session) enterStore(session);
+
+  const session = JSON.parse(
+    localStorage.getItem("electrotech_session") || "null"
+  );
+
+  if (session) {
+    enterStore(session);
+  }
+
 }
 
-// MEMUAT PRODUK
+// MEMUAT PRODUK DARI GOOGLE SHEETS
 async function loadProducts() {
+
   try {
+
     const res = await fetch(API_URL);
-    if (!res.ok) throw new Error("Gagal mengambil data");
+
+    if (!res.ok) {
+      throw new Error("Gagal mengambil data");
+    }
+
     const json = await res.json();
+
     products = json.data || [];
+
     renderProducts();
+
   } catch (err) {
+
     document.getElementById("product-loading").innerHTML =
       "<p class='text-red-400 font-semibold'>Gagal memuat produk dari database. Periksa koneksi atau URL Google Apps Script.</p>";
+
   }
+
 }
 
 // MENAMPILKAN PRODUK
 function renderProducts() {
+
   const grid = document.getElementById("product-grid");
+
   grid.innerHTML = "";
 
   products.forEach(p => {
+
     grid.innerHTML += `
+
       <div class="flex flex-col">
-        <img src="${p.foto || 'https://via.placeholder.com/300?text=Produk+Elektronik'}"
+
+        <img
+          src="${p.foto || 'https://via.placeholder.com/300?text=Produk+Elektronik'}"
           alt="${p.nama || 'Produk elektronik'}"
           onerror="this.src='https://via.placeholder.com/300?text=Foto+Produk'">
 
         <div class="p-5 flex-1 flex flex-col justify-between">
+
           <div>
-            <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full">${p.kategori || 'Elektronik'}</span>
-            <h4 class="font-bold text-lg mt-3">${p.nama || 'Produk Elektronik'}</h4>
-            <p class="text-xs mt-2">${p.deskripsi || ''}</p>
-            <p class="text-xs mt-2">Sisa Stok: <strong>${p.stok || 0}</strong></p>
+
+            <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full">
+              ${p.kategori || 'Elektronik'}
+            </span>
+
+            <h4 class="font-bold text-lg mt-3">
+              ${p.nama || 'Produk Elektronik'}
+            </h4>
+
+            <p class="text-xs mt-2">
+              ${p.deskripsi || ''}
+            </p>
+
+            <p class="text-xs mt-2">
+              Sisa Stok:
+              <strong>${p.stok || 0}</strong>
+            </p>
+
           </div>
 
           <div class="mt-5 pt-3 border-t border-slate-600 flex items-center justify-between gap-2">
-            <span class="font-extrabold text-base">Rp ${Number(p.harga || 0).toLocaleString("id-ID")}</span>
-            <button onclick="addToCart('${String(p.id).replace(/'/g, "\\'")}')"
-              class="text-xs font-bold px-3 py-2 rounded-lg">+ Keranjang</button>
+
+            <span class="font-extrabold text-base">
+              Rp ${Number(p.harga || 0).toLocaleString("id-ID")}
+            </span>
+
+            <button
+              onclick="addToCart('${String(p.id).replace(/'/g, "\\'")}')"
+              class="text-xs font-bold px-3 py-2 rounded-lg">
+              + Keranjang
+            </button>
+
           </div>
         </div>
       </div>
+
     `;
+
   });
 
   document.getElementById("product-loading").classList.add("hidden");
 
   if (products.length === 0) {
+
     document.getElementById("product-loading").innerHTML =
       "<p class='text-blue-200'>Belum ada produk tersedia.</p>";
+
     document.getElementById("product-loading").classList.remove("hidden");
+
     return;
+
   }
 
   document.getElementById("carousel-section").classList.remove("hidden");
+
   currentSlide = 0;
+
   createIndicators();
+
   startCarousel();
+
 }
 
-// INDIKATOR CAROUSEL
+// MEMBUAT INDIKATOR
 function createIndicators() {
+
   const indicators = document.getElementById("carousel-indicators");
+
   indicators.innerHTML = "";
 
   products.forEach((p, i) => {
+
     const dot = document.createElement("button");
+
     dot.className = "carousel-dot";
+
     dot.setAttribute("aria-label", "Lihat produk " + (i + 1));
+
     dot.onclick = () => goToSlide(i);
+
     indicators.appendChild(dot);
+
   });
 
   updateIndicators();
+
 }
 
+// MEMPERBARUI INDIKATOR
 function updateIndicators() {
+
   document.querySelectorAll(".carousel-dot").forEach((dot, i) => {
+
     dot.classList.toggle("active", i === currentSlide);
+
   });
+
 }
 
-// JARAK GESER
+// MENGHITUNG JARAK GESER
 function getSlideWidth() {
+
   const grid = document.getElementById("product-grid");
+
   const card = grid.querySelector("div");
+
   if (!card) return 300;
 
   const style = window.getComputedStyle(grid);
+
   const gap = parseFloat(style.columnGap) || 0;
+
   return card.offsetWidth + gap;
+
 }
 
+// SCROLL KE PRODUK
 function scrollToCurrentSlide() {
+
   const grid = document.getElementById("product-grid");
+
   grid.scrollTo({
     left: currentSlide * getSlideWidth(),
     behavior: "smooth"
   });
+
 }
 
-// GESER MANUAL
+// GESER PRODUK MANUAL
 function moveCarousel(direction) {
+
   if (products.length <= 1) return;
 
-  currentSlide = (currentSlide + direction + products.length) % products.length;
+  currentSlide =
+    (currentSlide + direction + products.length) % products.length;
+
   scrollToCurrentSlide();
+
   updateIndicators();
+
   restartCarousel();
+
 }
 
+// PILIH PRODUK DARI INDIKATOR
 function goToSlide(index) {
+
   currentSlide = index;
+
   scrollToCurrentSlide();
+
   updateIndicators();
+
   restartCarousel();
+
 }
 
-// SLIDE OTOMATIS
+// SLIDE OTOMATIS SETIAP 3 DETIK
 function startCarousel() {
+
   stopCarousel();
+
   if (products.length <= 1) return;
 
   carouselTimer = setInterval(() => {
+
     currentSlide++;
 
-    if (currentSlide >= products.length) currentSlide = 0;
+    if (currentSlide >= products.length) {
+      currentSlide = 0;
+    }
 
     scrollToCurrentSlide();
+
     updateIndicators();
+
   }, 3000);
+
 }
 
+// MENGHENTIKAN SLIDE
 function stopCarousel() {
+
   if (carouselTimer) {
+
     clearInterval(carouselTimer);
+
     carouselTimer = null;
+
   }
+
 }
 
+// MEMULAI ULANG SLIDE
 function restartCarousel() {
+
   stopCarousel();
+
   startCarousel();
+
 }
 
+// PAUSE SAAT TAB TIDAK AKTIF
 document.addEventListener("visibilitychange", () => {
-  if (document.hidden) stopCarousel();
-  else startCarousel();
+
+  if (document.hidden) {
+    stopCarousel();
+  } else {
+    startCarousel();
+  }
+
 });
 
-// KERANJANG
+// MENAMBAHKAN PRODUK KE KERANJANG
 function addToCart(id) {
+
   const prod = products.find(p => String(p.id) === String(id));
+
   if (!prod) return;
 
   const exist = cart.find(item => String(item.id) === String(id));
 
   if (exist) {
+
     exist.qty += 1;
+
   } else {
-    cart.push({ ...prod, qty: 1 });
+
+    cart.push({
+      ...prod,
+      qty: 1
+    });
+
   }
 
   updateCartUI();
+
 }
 
+// MEMPERBARUI KERANJANG
 function updateCartUI() {
+
   document.getElementById("cart-count").innerText =
     cart.reduce((total, item) => total + item.qty, 0);
 
   const container = document.getElementById("cart-items");
+
   container.innerHTML = "";
 
   let total = 0;
 
   cart.forEach((item, index) => {
+
     total += Number(item.harga || 0) * item.qty;
 
     container.innerHTML += `
+
       <div class="flex justify-between items-center bg-slate-800 p-3 rounded-xl text-sm border border-slate-600 gap-3">
+
         <div>
-          <p class="font-semibold text-white">${item.nama}</p>
-          <p class="text-xs text-slate-300">Rp ${Number(item.harga).toLocaleString("id-ID")} x ${item.qty}</p>
+
+          <p class="font-semibold text-white">
+            ${item.nama}
+          </p>
+
+          <p class="text-xs text-slate-300">
+            Rp ${Number(item.harga).toLocaleString("id-ID")} x ${item.qty}
+          </p>
+
         </div>
-        <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-300 text-xs font-bold">Hapus</button>
+
+        <button
+          onclick="removeFromCart(${index})"
+          class="text-red-400 hover:text-red-300 text-xs font-bold">
+          Hapus
+        </button>
+
       </div>
+
     `;
+
   });
 
   document.getElementById("cart-total").innerText =
     "Rp " + total.toLocaleString("id-ID");
+
 }
 
+// MENGHAPUS PRODUK DARI KERANJANG
 function removeFromCart(index) {
+
   cart.splice(index, 1);
+
   updateCartUI();
+
 }
 
+// BUKA TUTUP KERANJANG
 function toggleCart() {
+
   const modal = document.getElementById("cart-modal");
+
   modal.classList.toggle("hidden");
+
   modal.classList.toggle("flex");
+
 }
 
 // CHECKOUT
 async function handleCheckout(e) {
+
   e.preventDefault();
 
   if (cart.length === 0) {
+
     alert("Keranjang belanja Anda masih kosong!");
+
     return;
+
   }
 
   const btn = document.getElementById("btn-submit");
+
   btn.innerText = "Mencatat Pesanan...";
+
   btn.disabled = true;
 
   const invoiceCode = "INV-" + Date.now().toString().slice(-6);
 
   const payload = {
+
     nama: document.getElementById("cust-name").value,
+
     whatsapp: document.getElementById("cust-phone").value,
+
     alamat: document.getElementById("cust-address").value,
+
     items: cart,
-    total: cart.reduce((acc, item) => acc + Number(item.harga || 0) * item.qty, 0)
+
+    total: cart.reduce(
+      (acc, item) => acc + Number(item.harga || 0) * item.qty,
+      0
+    )
+
   };
 
   try {
+
     // KIRIM PESANAN KE GOOGLE SHEETS
     fetch(API_URL, {
+
       method: "POST",
+
       mode: "no-cors",
-      headers: { "Content-Type": "text/plain" },
+
+      headers: {
+        "Content-Type": "text/plain"
+      },
+
       body: JSON.stringify(payload)
+
     });
 
     // FORMAT PESAN WHATSAPP
     let textWA = `Halo Admin, saya ingin konfirmasi pesanan:\n\n`;
+
     textWA += `🧾 *Invoice: ${invoiceCode}*\n`;
+
     textWA += `👤 *Nama:* ${payload.nama}\n`;
+
     textWA += `📱 *No. WA:* ${payload.whatsapp}\n`;
+
     textWA += `📍 *Alamat:* ${payload.alamat}\n\n`;
+
     textWA += `💻 *Daftar Belanja:*\n`;
 
     payload.items.forEach(item => {
+
       textWA += `• ${item.nama} (${item.qty}x) = Rp ${(Number(item.harga) * item.qty).toLocaleString("id-ID")}\n`;
+
     });
 
     textWA += `\n💰 *Total Pembayaran: Rp ${payload.total.toLocaleString("id-ID")}*\n\n`;
+
     textWA += `Mohon informasi nomor rekening dan total ongkirnya. Terima kasih!`;
 
+    // BUKA WHATSAPP ADMIN
     window.open(
       `https://wa.me/${WA_ADMIN}?text=${encodeURIComponent(textWA)}`,
       "_blank"
     );
 
+    // RESET KERANJANG
     cart = [];
+
     updateCartUI();
+
     toggleCart();
+
     e.target.reset();
 
   } catch (err) {
+
     alert("Gagal memproses pesanan. Silakan coba kembali.");
+
   } finally {
+
     btn.innerText = "Beli Sekarang via WhatsApp 📲";
+
     btn.disabled = false;
+
   }
+
 }
 
-// MULAI WEBSITE
+// JALANKAN WEBSITE
 checkSession();
+
 loadProducts();
+
 </script>
 
 </body>
