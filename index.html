@@ -2,95 +2,159 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HIJUP - Fashion Muslim Store</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script src="https://cdn.tailwindcss.com"></script>
+<title>HIJUP - Fashion Muslim Store</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: white;
-      color: #111;
-    }
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    .serif {
-      font-family: 'Playfair Display', serif;
-    }
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #fff;
+    color: #222;
+}
 
+.serif {
+    font-family: 'Playfair Display', serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.nav-link {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    white-space: nowrap;
+    transition: .3s;
+}
+
+.nav-link:hover {
+    color: #a66d65;
+}
+
+.product-image {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    transition: transform .5s ease;
+    background: #f3f0ed;
+}
+
+.product-card {
+    overflow: hidden;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.04);
+}
+
+.product-card .image-wrap {
+    overflow: hidden;
+    position: relative;
+    background: #f3f0ed;
+}
+
+.heart {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    transition: .3s;
+}
+
+.heart.active {
+    color: #c44b61;
+}
+
+.add-btn {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: .3s;
+}
+
+.product-card:hover .add-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.social-float {
+    position: fixed;
+    right: 22px;
+    bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 100;
+}
+
+.social-float a {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 3px 12px #0002;
+    transition: .3s;
+}
+
+.social-float a:hover {
+    transform: scale(1.1);
+}
+
+.wa {
+    background: #111;
+}
+
+.ig {
+    background: #c13584;
+}
+
+.banner-one {
+    background: #a78b8b;
+}
+
+.banner-two {
+    background: #a7655d;
+}
+
+.modal {
+    transition: .3s;
+}
+
+@media(max-width: 640px) {
     .product-image {
-      width: 100%;
-      height: 390px;
-      object-fit: cover;
-      background: #eee;
+        height: 230px;
     }
 
-    .product-card:hover .product-image {
-      transform: scale(1.025);
-    }
-
-    .product-image {
-      transition: transform .4s ease;
+    .add-btn {
+        opacity: 1;
+        transform: none;
     }
 
     .social-float {
-      position: fixed;
-      right: 25px;
-      bottom: 25px;
-      z-index: 50;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .social-float a {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      box-shadow: 0 3px 10px #0002;
-    }
-
-    .wa {
-      background: #000;
-    }
-
-    .ig {
-      background: #c13584;
-    }
-
-    .nav-link {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .3px;
-      white-space: nowrap;
-    }
-
-    .heart.active {
-      color: red;
-    }
-
-    @media(max-width: 640px) {
-      .product-image {
-        height: 260px;
-      }
-
-      .social-float {
-        right: 15px;
+        right: 13px;
         bottom: 15px;
-      }
     }
-  </style>
+}
+</style>
 </head>
 
 <body>
@@ -98,193 +162,368 @@
 <!-- HEADER -->
 <header class="bg-white sticky top-0 z-40 border-b border-gray-200">
 
-  <div class="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between gap-4">
+    <div class="max-w-7xl mx-auto px-5 py-4 flex justify-between items-center gap-4">
 
-    <a href="#" class="serif text-3xl tracking-widest font-semibold">
-      HIJUP
-    </a>
+        <a href="#" class="serif text-3xl md:text-4xl tracking-widest font-semibold">
+            HIJUP
+        </a>
 
-    <!-- SEARCH -->
-    <div class="hidden md:flex items-center flex-1 max-w-md ml-8 border-b border-gray-300 py-2">
-      <span class="mr-3 text-gray-500">⌕</span>
-      <input
-        type="text"
-        id="search"
-        placeholder="Cari produk atau brand"
-        class="w-full outline-none text-sm"
-        oninput="searchProducts()">
+        <!-- SEARCH DESKTOP -->
+        <div class="hidden md:flex items-center flex-1 max-w-md ml-8 border-b border-gray-300 py-2">
+            <span class="mr-3 text-xl">⌕</span>
+            <input
+                type="text"
+                id="search"
+                placeholder="Cari produk atau brand"
+                class="w-full outline-none text-sm"
+                oninput="searchProducts()">
+        </div>
+
+        <!-- HEADER ICON -->
+        <div class="flex items-center gap-5">
+
+            <button onclick="showFavorites()" class="text-3xl hover:text-red-500">
+                ♡
+            </button>
+
+            <button onclick="toggleCart()" class="text-2xl relative">
+                ♧
+                <span id="cart-count"
+                    class="absolute -top-2 -right-3 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    0
+                </span>
+            </button>
+
+            <button onclick="toggleCart()"
+                class="hidden sm:block bg-black text-white px-6 py-2.5 text-xs font-semibold">
+                LOGIN / REGISTER
+            </button>
+
+        </div>
     </div>
 
-    <!-- ICON HEADER -->
-    <div class="flex items-center gap-5">
+    <!-- NAVIGATION -->
+    <nav class="border-t border-gray-100">
+        <div class="max-w-7xl mx-auto flex justify-center gap-5 md:gap-9 py-3 px-3 overflow-x-auto">
 
-      <button onclick="showFavorites()" title="Favorit"
-        class="text-2xl">
-        ♡
-      </button>
+            <a href="#products" class="nav-link">PRODUCTS</a>
+            <a href="#promo" class="nav-link">PROMO⌄</a>
+            <a href="#products" class="nav-link">NEW ARRIVALS</a>
+            <a href="#products" class="nav-link text-red-500">SALE</a>
+            <a href="#brands" class="nav-link">BRANDS⌄</a>
+            <a href="#exclusive" class="nav-link">HIJUP EXCLUSIVE⌄</a>
+            <a href="#footer" class="nav-link">MAGAZINE</a>
 
-      <button onclick="toggleCart()" title="Keranjang"
-        class="text-2xl relative">
-        ♧
-        <span id="cart-count"
-          class="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-          0
-        </span>
-      </button>
-
-      <button onclick="toggleCart()"
-        class="hidden sm:block bg-black text-white px-6 py-2 text-xs font-semibold">
-        LOGIN / REGISTER
-      </button>
-
-    </div>
-  </div>
-
-  <!-- NAVIGATION -->
-  <nav class="border-t border-gray-100">
-    <div class="max-w-7xl mx-auto flex items-center justify-center gap-5 md:gap-9 py-3 px-3 overflow-x-auto">
-
-      <a href="#products" class="nav-link">PRODUCTS</a>
-      <a href="#promo" class="nav-link">PROMO⌄</a>
-      <a href="#products" class="nav-link">NEW ARRIVALS</a>
-      <a href="#products" class="nav-link text-red-500">SALE</a>
-      <a href="#brands" class="nav-link">BRANDS⌄</a>
-      <a href="#exclusive" class="nav-link">HIJUP EXCLUSIVE⌄</a>
-      <a href="#footer" class="nav-link">MAGAZINE</a>
-
-    </div>
-  </nav>
+        </div>
+    </nav>
 
 </header>
 
 
-<!-- MAIN CONTENT -->
-<main class="max-w-7xl mx-auto px-5 py-7">
+<!-- MAIN -->
+<main class="max-w-7xl mx-auto px-5 py-8">
 
-  <!-- MOBILE SEARCH -->
-  <div class="md:hidden mb-6 border-b border-gray-300 py-2 flex">
-    <input
-      type="text"
-      id="mobile-search"
-      placeholder="Cari produk atau brand"
-      class="w-full outline-none text-sm"
-      oninput="searchMobile()">
-    <span>⌕</span>
-  </div>
-
-  <!-- TITLE -->
-  <section id="products">
-
-    <div class="flex justify-between items-center mb-5">
-      <h2 class="serif text-xl md:text-2xl font-semibold">
-        Produk Terpopuler
-      </h2>
-
-      <a href="#products" class="text-xs font-semibold">
-        LIHAT SEMUA
-      </a>
+    <!-- SEARCH MOBILE -->
+    <div class="md:hidden mb-7 border-b border-gray-300 py-2 flex">
+        <input
+            type="text"
+            id="mobile-search"
+            placeholder="Cari produk atau brand"
+            class="w-full outline-none text-sm"
+            oninput="searchMobile()">
+        <span>⌕</span>
     </div>
 
-    <!-- LOADING -->
-    <div id="product-loading" class="text-center py-16 text-gray-500">
-      <p>Memuat katalog produk...</p>
-    </div>
 
-    <!-- PRODUCT GRID -->
-    <div id="product-grid"
-      class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-7 hidden">
-    </div>
+    <!-- HERO BANNER -->
+    <section class="mb-12">
 
-  </section>
+        <div class="relative bg-[#eee5df] min-h-[300px] md:min-h-[420px] flex items-center overflow-hidden">
+
+            <div class="relative z-10 p-8 md:p-16 max-w-xl">
+
+                <p class="text-xs tracking-[5px] mb-5 text-[#98746d]">
+                    ELEGANT MUSLIM FASHION
+                </p>
+
+                <h1 class="serif text-4xl md:text-6xl leading-tight text-[#493b37]">
+                    Discover Your
+                    <br>
+                    Beautiful Style
+                </h1>
+
+                <p class="text-sm text-gray-600 mt-5 leading-7">
+                    Temukan koleksi hijab dan fashion muslim
+                    dengan gaya elegan, modern, dan nyaman.
+                </p>
+
+                <a href="#products"
+                    class="inline-block bg-[#493b37] text-white px-8 py-3 mt-7 text-xs tracking-widest hover:bg-black transition">
+                    SHOP NOW
+                </a>
+
+            </div>
+
+            <div class="absolute right-0 top-0 h-full w-1/2 hidden md:block">
+                <img
+                    src="https://images.unsplash.com/photo-1584184924103-e310d9dc82fc?auto=format&fit=crop&w=900&q=85"
+                    class="w-full h-full object-cover"
+                    alt="Fashion Collection">
+            </div>
+
+        </div>
+
+    </section>
 
 
-  <!-- PROMO BANNER -->
-  <section id="promo" class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- CATEGORY -->
+    <section class="mb-14">
 
-    <div class="bg-[#a77a75] min-h-48 flex items-center justify-center text-white text-center p-8">
-      <div>
-        <h2 class="serif text-3xl mb-2">HIJUP</h2>
-        <p class="text-sm tracking-widest">SPECIAL COLLECTION</p>
-      </div>
-    </div>
+        <div class="text-center mb-8">
+            <p class="text-xs tracking-[4px] text-gray-400 mb-2">
+                EXPLORE OUR COLLECTION
+            </p>
 
-    <div class="bg-[#a9655c] min-h-48 flex items-center justify-center text-white text-center p-8">
-      <div>
-        <h2 class="serif text-3xl mb-2">NEW ARRIVALS</h2>
-        <p class="text-sm tracking-widest">DISCOVER YOUR STYLE</p>
-      </div>
-    </div>
+            <h2 class="serif text-3xl">
+                Shop By Category
+            </h2>
+        </div>
 
-  </section>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+            <a href="#products" class="relative h-40 md:h-52 overflow-hidden group">
+                <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=500&q=80"
+                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+                    <span class="text-white serif text-xl">Hijab</span>
+                </div>
+            </a>
+
+            <a href="#products" class="relative h-40 md:h-52 overflow-hidden group">
+                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=500&q=80"
+                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+                    <span class="text-white serif text-xl">Fashion</span>
+                </div>
+            </a>
+
+            <a href="#products" class="relative h-40 md:h-52 overflow-hidden group">
+                <img src="https://images.unsplash.com/photo-1614179689702-355944cd0918?auto=format&fit=crop&w=500&q=80"
+                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+                    <span class="text-white serif text-xl">Accessories</span>
+                </div>
+            </a>
+
+            <a href="#products" class="relative h-40 md:h-52 overflow-hidden group">
+                <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=500&q=80"
+                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+                    <span class="text-white serif text-xl">New Style</span>
+                </div>
+            </a>
+
+        </div>
+
+    </section>
 
 
-  <!-- BRAND -->
-  <section id="brands" class="text-center py-14">
-    <h2 class="serif text-2xl mb-3">Our Collection</h2>
-    <p class="text-sm text-gray-500">
-      Temukan koleksi hijab dan fashion muslim pilihan terbaik.
-    </p>
-  </section>
+    <!-- PRODUCTS -->
+    <section id="products" class="pt-5">
+
+        <div class="flex justify-between items-center mb-7">
+
+            <div>
+                <p class="text-xs tracking-[3px] text-gray-400 mb-2">
+                    OUR BEST COLLECTION
+                </p>
+
+                <h2 class="serif text-2xl md:text-3xl font-semibold">
+                    Produk Terpopuler
+                </h2>
+            </div>
+
+            <a href="#products" onclick="resetProducts()"
+                class="text-xs font-semibold hover:text-[#a66d65]">
+                LIHAT SEMUA →
+            </a>
+
+        </div>
+
+        <!-- LOADING -->
+        <div id="product-loading" class="text-center py-16 text-gray-500">
+            <p>Memuat katalog produk...</p>
+        </div>
+
+        <!-- PRODUCT GRID -->
+        <div id="product-grid"
+            class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-7 hidden">
+        </div>
+
+    </section>
+
+
+    <!-- PROMO -->
+    <section id="promo" class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-5">
+
+        <div class="banner-one min-h-64 flex items-center justify-center text-center text-white p-8">
+
+            <div>
+                <p class="text-xs tracking-[4px] mb-4">SPECIAL COLLECTION</p>
+
+                <h2 class="serif text-4xl md:text-5xl mb-3">
+                    HIJUP
+                </h2>
+
+                <p class="text-xs tracking-[3px]">
+                    ELEGANCE IN EVERY DETAIL
+                </p>
+
+                <a href="#products"
+                    class="inline-block border border-white px-7 py-3 mt-6 text-xs tracking-widest hover:bg-white hover:text-black transition">
+                    EXPLORE NOW
+                </a>
+            </div>
+
+        </div>
+
+        <div class="banner-two min-h-64 flex items-center justify-center text-center text-white p-8">
+
+            <div>
+                <p class="text-xs tracking-[4px] mb-4">LATEST COLLECTION</p>
+
+                <h2 class="serif text-4xl md:text-5xl mb-3">
+                    NEW ARRIVALS
+                </h2>
+
+                <p class="text-xs tracking-[3px]">
+                    DISCOVER YOUR STYLE
+                </p>
+
+                <a href="#products"
+                    class="inline-block border border-white px-7 py-3 mt-6 text-xs tracking-widest hover:bg-white hover:text-black transition">
+                    SHOP NOW
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- EXCLUSIVE -->
+    <section id="exclusive" class="py-20 text-center">
+
+        <p class="text-xs tracking-[4px] text-gray-400 mb-3">
+            MADE WITH LOVE
+        </p>
+
+        <h2 class="serif text-3xl md:text-4xl mb-5">
+            Elegance Is An Attitude
+        </h2>
+
+        <p class="text-sm text-gray-500 max-w-xl mx-auto leading-7">
+            Hadirkan keindahan dalam setiap penampilan.
+            Pilihan koleksi fashion muslim yang membuat
+            setiap momen terasa lebih istimewa.
+        </p>
+
+    </section>
+
+
+    <!-- BRANDS -->
+    <section id="brands" class="border-t border-b border-gray-200 py-10 text-center">
+
+        <h2 class="serif text-2xl mb-4">
+            Our Collection
+        </h2>
+
+        <p class="text-xs tracking-widest text-gray-500">
+            HIJAB • FASHION • ACCESSORIES • LIFESTYLE
+        </p>
+
+    </section>
 
 </main>
 
 
 <!-- FOOTER -->
-<footer id="footer" class="bg-black text-white py-12 px-5">
+<footer id="footer" class="bg-[#211d1c] text-white py-14 px-6">
 
-  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
 
-    <div>
-      <h2 class="serif text-3xl tracking-widest mb-4">HIJUP</h2>
-      <p class="text-xs text-gray-300 leading-6">
-        Temukan gaya fashion muslim yang elegan,
-        modern, dan nyaman untuk setiap kesempatan.
-      </p>
+        <div>
+            <h2 class="serif text-4xl tracking-widest mb-5">
+                HIJUP
+            </h2>
+
+            <p class="text-xs text-gray-300 leading-7">
+                Temukan gaya fashion muslim yang elegan,
+                modern, dan nyaman untuk setiap kesempatan.
+                Tampil percaya diri dengan koleksi pilihan kami.
+            </p>
+        </div>
+
+
+        <div>
+            <h3 class="font-semibold text-sm mb-5 tracking-widest">
+                INFORMASI
+            </h3>
+
+            <div class="text-xs text-gray-300 space-y-4">
+
+                <p><a href="#products" class="hover:text-white">Produk Kami</a></p>
+
+                <p><a href="#promo" class="hover:text-white">Promo</a></p>
+
+                <p><a href="#brands" class="hover:text-white">Brand</a></p>
+
+                <p><a href="#exclusive" class="hover:text-white">Tentang Kami</a></p>
+
+            </div>
+        </div>
+
+
+        <div>
+            <h3 class="font-semibold text-sm mb-5 tracking-widest">
+                HUBUNGI KAMI
+            </h3>
+
+            <div class="text-xs text-gray-300 space-y-5">
+
+                <p>
+                    Instagram:
+                    <a href="https://www.instagram.com/saufiani150/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-pink-300 hover:underline">
+                        @saufiani150
+                    </a>
+                </p>
+
+                <p>
+                    WhatsApp:
+                    <a href="https://wa.me/6287844263501"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-green-300 hover:underline">
+                        Hubungi Admin
+                    </a>
+                </p>
+
+            </div>
+        </div>
+
     </div>
 
-    <div>
-      <h3 class="font-semibold mb-4">INFORMASI</h3>
-      <div class="text-xs text-gray-300 space-y-3">
-        <p><a href="#products">Produk Kami</a></p>
-        <p><a href="#promo">Promo</a></p>
-        <p><a href="#brands">Brand</a></p>
-        <p><a href="#footer">Tentang Kami</a></p>
-      </div>
-    </div>
 
-    <div>
-      <h3 class="font-semibold mb-4">HUBUNGI KAMI</h3>
+    <div class="max-w-7xl mx-auto border-t border-gray-700 mt-12 pt-6 text-center">
 
-      <div class="text-xs text-gray-300 space-y-3">
-
-        <p>
-          Instagram:
-          <a href="https://www.instagram.com/saufiani150/"
-             target="_blank"
-             class="text-pink-300 hover:underline">
-            @saufiani150
-          </a>
+        <p class="text-xs text-gray-400">
+            © 2026 HIJUP Fashion Store. All Rights Reserved.
         </p>
 
-        <p>
-          WhatsApp:
-          <a href="https://wa.me/6281234567890"
-             target="_blank"
-             class="text-green-300 hover:underline">
-            Hubungi Admin
-          </a>
-        </p>
-
-      </div>
     </div>
-
-  </div>
-
-  <div class="max-w-7xl mx-auto border-t border-gray-700 mt-10 pt-5 text-center">
-    <p class="text-xs text-gray-400">
-      © 2026 HIJUP Fashion Store. All rights reserved.
-    </p>
-  </div>
 
 </footer>
 
@@ -292,328 +531,396 @@
 <!-- FLOATING SOCIAL MEDIA -->
 <div class="social-float">
 
-  <!-- INSTAGRAM -->
-  <a href="https://www.instagram.com/saufiani150/"
-     target="_blank"
-     rel="noopener noreferrer"
-     class="ig"
-     title="Instagram">
+    <!-- INSTAGRAM -->
+    <a href="https://www.instagram.com/saufiani150/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="ig"
+        title="Instagram">
 
-    <svg width="25" height="25" viewBox="0 0 24 24"
-      fill="none" stroke="white" stroke-width="2">
-      <rect x="3" y="3" width="18" height="18" rx="5"/>
-      <circle cx="12" cy="12" r="4"/>
-      <circle cx="18" cy="6" r="1" fill="white"/>
-    </svg>
+        <svg width="25" height="25" viewBox="0 0 24 24"
+            fill="none" stroke="white" stroke-width="2">
 
-  </a>
+            <rect x="3" y="3" width="18" height="18" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="18" cy="6" r="1" fill="white"/>
 
-  <!-- WHATSAPP -->
-  <a href="https://wa.me/6281234567890"
-     target="_blank"
-     rel="noopener noreferrer"
-     class="wa"
-     title="WhatsApp">
+        </svg>
 
-    <svg width="26" height="26" viewBox="0 0 24 24"
-      fill="none" stroke="white" stroke-width="1.8">
-      <path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-5.1A8.5 8.5 0 1 1 21 11.5Z"/>
-      <path d="M9 8.5c.5 2.5 2 4 4.5 5l1.3-1.2 2 1c-.2 1.5-1.3 2.2-2.5 2.2-3.7-.5-7-3.8-7.5-7.5 0-1.2.7-2.3 2.2-2.5l1 2Z"/>
-    </svg>
+    </a>
 
-  </a>
+
+    <!-- WHATSAPP -->
+    <a href="https://wa.me/6287844263501"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="wa"
+        title="WhatsApp">
+
+        <svg width="26" height="26" viewBox="0 0 24 24"
+            fill="none" stroke="white" stroke-width="1.8">
+
+            <path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-5.1A8.5 8.5 0 1 1 21 11.5Z"/>
+
+            <path d="M9 8.5c.5 2.5 2 4 4.5 5l1.3-1.2 2 1c-.2 1.5-1.3 2.2-2.5 2.2-3.7-.5-7-3.8-7.5-7.5 0-1.2.7-2.3 2.2-2.5l1 2Z"/>
+
+        </svg>
+
+    </a>
 
 </div>
 
 
 <!-- CART MODAL -->
 <div id="cart-modal"
-  class="fixed inset-0 bg-black/50 z-50 hidden justify-end">
+    class="fixed inset-0 bg-black/50 z-50 hidden justify-end">
 
-  <div class="bg-white w-full max-w-md h-full p-6 flex flex-col overflow-y-auto">
+    <div class="bg-white w-full max-w-md h-full p-6 flex flex-col overflow-y-auto">
 
-    <div class="flex justify-between items-center border-b pb-4">
-      <h2 class="serif text-xl font-semibold">Keranjang Belanja</h2>
+        <div class="flex justify-between items-center border-b pb-5">
 
-      <button onclick="toggleCart()" class="text-3xl">
-        &times;
-      </button>
+            <h2 class="serif text-2xl">
+                Keranjang Belanja
+            </h2>
+
+            <button onclick="toggleCart()" class="text-3xl">
+                &times;
+            </button>
+
+        </div>
+
+
+        <div id="cart-items" class="flex-1 py-5 space-y-4">
+
+            <p class="text-sm text-gray-400">
+                Keranjang masih kosong.
+            </p>
+
+        </div>
+
+
+        <div class="border-t pt-5">
+
+            <div class="flex justify-between font-bold mb-5">
+
+                <span>Total Pembayaran:</span>
+
+                <span id="cart-total">
+                    Rp 0
+                </span>
+
+            </div>
+
+
+            <form id="checkout-form" onsubmit="handleCheckout(event)">
+
+                <input
+                    id="cust-name"
+                    type="text"
+                    required
+                    placeholder="Nama Lengkap"
+                    class="w-full border p-3 mb-3 text-sm outline-none">
+
+                <input
+                    id="cust-phone"
+                    type="tel"
+                    required
+                    placeholder="Nomor WhatsApp"
+                    class="w-full border p-3 mb-3 text-sm outline-none">
+
+                <textarea
+                    id="cust-address"
+                    required
+                    placeholder="Alamat Lengkap Pengiriman"
+                    class="w-full border p-3 mb-4 text-sm outline-none"
+                    rows="3"></textarea>
+
+
+                <button
+                    type="submit"
+                    id="btn-submit"
+                    class="w-full bg-black text-white py-4 text-xs font-semibold tracking-widest hover:bg-gray-800">
+
+                    BELI SEKARANG VIA WHATSAPP
+
+                </button>
+
+            </form>
+
+        </div>
+
     </div>
 
-    <div id="cart-items" class="flex-1 py-5 space-y-3">
-      <p class="text-sm text-gray-400">Keranjang masih kosong.</p>
-    </div>
-
-    <div class="border-t pt-5">
-
-      <div class="flex justify-between font-bold mb-5">
-        <span>Total:</span>
-        <span id="cart-total">Rp 0</span>
-      </div>
-
-      <form id="checkout-form" onsubmit="handleCheckout(event)">
-
-        <input id="cust-name"
-          type="text"
-          required
-          placeholder="Nama Lengkap"
-          class="w-full border p-3 mb-3 text-sm outline-none">
-
-        <input id="cust-phone"
-          type="tel"
-          required
-          placeholder="Nomor WhatsApp"
-          class="w-full border p-3 mb-3 text-sm outline-none">
-
-        <textarea id="cust-address"
-          required
-          placeholder="Alamat Lengkap"
-          class="w-full border p-3 mb-4 text-sm outline-none"
-          rows="3"></textarea>
-
-        <button type="submit"
-          id="btn-submit"
-          class="w-full bg-black text-white py-3 text-sm font-semibold hover:bg-gray-800">
-          BELI SEKARANG VIA WHATSAPP
-        </button>
-
-      </form>
-
-    </div>
-
-  </div>
 </div>
 
 
 <!-- JAVASCRIPT -->
 <script>
 
-  // ==================================
-  // PENGATURAN WEBSITE
-  // ==================================
+// ====================================
+// PENGATURAN WEBSITE
+// ====================================
 
-  // Masukkan URL Google Apps Script
-  const API_URL = "https://script.google.com/macros/s/AKfycbwmtxsue4rnttyIQACXGMBZYf1GKIXMg-5NWrkqjjVx6V_SgpGKgT_STfJ0Mad38FV5/exec";
+// URL Google Apps Script
+const API_URL = "https://script.google.com/macros/s/AKfycbwmtxsue4rnttyIQACXGMBZYf1GKIXMg-5NWrkqjjVx6V_SgpGKgT_STfJ0Mad38FV5/exec";
 
-  // Ganti dengan nomor WhatsApp Admin
-  // Format: 628xxxxxxxxxx
-  const WA_ADMIN = "6287844263501";
+// Nomor WhatsApp Admin
+const WA_ADMIN = "6287844263501";
 
-  // Instagram toko
-  const IG_URL = "https://www.instagram.com/saufiani150/";
-
-  let products = [];
-  let cart = [];
-  let favorites = [];
+// Instagram
+const IG_URL = "https://www.instagram.com/saufiani150/";
 
 
-  // ==================================
-  // FORMAT RUPIAH
-  // ==================================
+let products = [];
+let cart = [];
+let favorites = [];
 
-  function rupiah(number) {
+
+// ====================================
+// FORMAT RUPIAH
+// ====================================
+
+function rupiah(number) {
     return Number(number || 0).toLocaleString("id-ID");
-  }
+}
 
 
-  // ==================================
-  // LOAD PRODUK GOOGLE SHEETS
-  // ==================================
+// ====================================
+// AMANKAN TEKS
+// ====================================
 
-  async function loadProducts() {
+function safe(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[char]);
+}
+
+
+// ====================================
+// LOAD PRODUK DARI GOOGLE SHEETS
+// ====================================
+
+async function loadProducts() {
 
     try {
 
-      if (API_URL.includes("MASUKKAN_URL")) {
-        throw new Error("URL API belum diatur");
-      }
+        const response = await fetch(API_URL);
 
-      const response = await fetch(API_URL);
-      if (!response.ok) throw new Error("Gagal mengambil data");
+        if (!response.ok) {
+            throw new Error("Gagal mengambil data");
+        }
 
-      const json = await response.json();
+        const json = await response.json();
 
-      products = json.data || [];
+        products = Array.isArray(json.data) ? json.data : [];
 
-      renderProducts();
+        renderProducts();
 
     } catch (error) {
 
-      document.getElementById("product-loading").innerHTML =
-        `<p class="text-gray-500 text-sm">
-          Katalog belum dapat dimuat.
-          Silakan periksa koneksi Google Sheets dan URL API.
-        </p>`;
+        document.getElementById("product-loading").innerHTML = `
+            <div class="text-center py-10">
+                <p class="text-gray-500 text-sm mb-3">
+                    Katalog belum dapat dimuat.
+                </p>
+                <button onclick="loadProducts()"
+                    class="bg-black text-white px-6 py-3 text-xs">
+                    COBA LAGI
+                </button>
+            </div>
+        `;
 
     }
 
-  }
+}
 
 
-  // ==================================
-  // AMANKAN TEKS DARI DATABASE
-  // ==================================
+// ====================================
+// TAMPILKAN PRODUK
+// ====================================
 
-  function safe(value) {
-    return String(value ?? "").replace(/[&<>"']/g, char => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    })[char]);
-  }
-
-
-  // ==================================
-  // TAMPILKAN PRODUK
-  // ==================================
-
-  function renderProducts(data = products) {
+function renderProducts(data = products) {
 
     const grid = document.getElementById("product-grid");
 
     grid.innerHTML = "";
 
     if (data.length === 0) {
-      grid.innerHTML =
-        `<p class="col-span-full text-center text-sm text-gray-500">
-          Produk belum tersedia.
-        </p>`;
+
+        grid.innerHTML = `
+            <p class="col-span-full text-center text-sm text-gray-500 py-10">
+                Produk belum tersedia.
+            </p>
+        `;
+
     }
 
     data.forEach(p => {
 
-      const image = safe(p.foto || "https://placehold.co/400x500?text=Product");
-      const name = safe(p.nama);
-      const category = safe(p.kategori || "Fashion");
-      const id = JSON.stringify(String(p.id)).replace(/</g, "\\u003c");
-      const favorite = favorites.includes(String(p.id));
+        const id = String(p.id);
+        const image = safe(p.foto || "https://placehold.co/400x500?text=Product");
+        const name = safe(p.nama);
+        const category = safe(p.kategori || "Fashion");
+        const price = rupiah(p.harga);
+        const isFavorite = favorites.includes(id);
 
-      grid.innerHTML += `
+        grid.innerHTML += `
 
-        <div class="product-card group">
+            <div class="product-card">
 
-          <div class="relative overflow-hidden bg-gray-100">
+                <div class="image-wrap">
 
-            <img
-              src="${image}"
-              alt="${name}"
-              class="product-image"
-              loading="lazy"
-              onerror="this.src='https://placehold.co/400x500?text=Product'">
+                    <img
+                        src="${image}"
+                        alt="${name}"
+                        class="product-image"
+                        loading="lazy"
+                        onerror="this.src='https://placehold.co/400x500?text=Product'">
 
-            <button
-              onclick='toggleFavorite(${id})'
-              class="heart absolute top-3 right-3 text-3xl bg-white/80 rounded-full w-9 h-9 flex items-center justify-center ${favorite ? "active" : ""}">
-              ${favorite ? "♥" : "♡"}
-            </button>
+                    <button
+                        onclick="toggleFavorite('${safe(id)}')"
+                        class="heart absolute top-3 right-3 ${isFavorite ? 'active' : ''}">
 
-            <button
-              onclick='addToCart(${id})'
-              class="absolute bottom-3 left-3 right-3 bg-white py-3 text-xs font-semibold tracking-wide opacity-95 hover:bg-black hover:text-white transition">
-              + TAMBAH KE KERANJANG
-            </button>
+                        ${isFavorite ? "♥" : "♡"}
 
-          </div>
+                    </button>
 
-          <div class="pt-3">
+                    <button
+                        onclick="addToCart('${safe(id)}')"
+                        class="add-btn absolute bottom-3 left-3 right-3 bg-white py-3 text-xs font-semibold tracking-widest hover:bg-black hover:text-white">
 
-            <p class="text-xs font-semibold mb-1">
-              Rp${rupiah(p.harga)}
-            </p>
+                        + TAMBAH KE KERANJANG
 
-            <h3 class="text-sm font-medium leading-5">
-              ${name}
-            </h3>
+                    </button>
 
-            <p class="serif text-sm text-gray-500 mt-1">
-              ${category}
-            </p>
+                </div>
 
-          </div>
+                <div class="pt-3">
 
-        </div>
+                    <p class="text-sm font-semibold mb-1">
+                        Rp${price}
+                    </p>
 
-      `;
+                    <h3 class="text-sm leading-5 font-medium">
+                        ${name}
+                    </h3>
+
+                    <p class="serif text-sm text-gray-500 mt-1">
+                        ${category}
+                    </p>
+
+                </div>
+
+            </div>
+
+        `;
 
     });
 
     document.getElementById("product-loading").classList.add("hidden");
+
     grid.classList.remove("hidden");
 
-  }
+}
 
 
-  // ==================================
-  // PENCARIAN PRODUK
-  // ==================================
+// ====================================
+// PENCARIAN DESKTOP
+// ====================================
 
-  function searchProducts() {
+function searchProducts() {
 
     const keyword = document.getElementById("search").value.toLowerCase();
 
     const result = products.filter(p =>
-      String(p.nama || "").toLowerCase().includes(keyword) ||
-      String(p.kategori || "").toLowerCase().includes(keyword)
+        String(p.nama || "").toLowerCase().includes(keyword) ||
+        String(p.kategori || "").toLowerCase().includes(keyword)
     );
 
     renderProducts(result);
 
-  }
+}
 
-  function searchMobile() {
+
+// ====================================
+// PENCARIAN MOBILE
+// ====================================
+
+function searchMobile() {
 
     const keyword = document.getElementById("mobile-search").value.toLowerCase();
 
     const result = products.filter(p =>
-      String(p.nama || "").toLowerCase().includes(keyword) ||
-      String(p.kategori || "").toLowerCase().includes(keyword)
+        String(p.nama || "").toLowerCase().includes(keyword) ||
+        String(p.kategori || "").toLowerCase().includes(keyword)
     );
 
     renderProducts(result);
 
-  }
+}
 
 
-  // ==================================
-  // FAVORIT
-  // ==================================
+// ====================================
+// RESET PRODUK
+// ====================================
 
-  function toggleFavorite(id) {
+function resetProducts() {
+
+    document.getElementById("search").value = "";
+    document.getElementById("mobile-search").value = "";
+
+    renderProducts(products);
+
+}
+
+
+// ====================================
+// FAVORIT
+// ====================================
+
+function toggleFavorite(id) {
 
     id = String(id);
 
     if (favorites.includes(id)) {
-      favorites = favorites.filter(item => item !== id);
+
+        favorites = favorites.filter(item => item !== id);
+
     } else {
-      favorites.push(id);
+
+        favorites.push(id);
+
     }
 
     renderProducts();
 
-  }
+}
 
-  function showFavorites() {
+
+function showFavorites() {
 
     const result = products.filter(p =>
-      favorites.includes(String(p.id))
+        favorites.includes(String(p.id))
     );
 
     renderProducts(result);
 
     document.getElementById("products").scrollIntoView({
-      behavior: "smooth"
+        behavior: "smooth"
     });
 
-  }
+}
 
 
-  // ==================================
-  // TAMBAH KE KERANJANG
-  // ==================================
+// ====================================
+// TAMBAH KERANJANG
+// ====================================
 
-  function addToCart(id) {
+function addToCart(id) {
 
     const product = products.find(p => String(p.id) === String(id));
 
@@ -622,26 +929,28 @@
     const exist = cart.find(item => String(item.id) === String(id));
 
     if (exist) {
-      exist.qty++;
+
+        exist.qty++;
+
     } else {
-      cart.push({
-        ...product,
-        qty: 1
-      });
+
+        cart.push({
+            ...product,
+            qty: 1
+        });
+
     }
 
     updateCartUI();
 
-    alert("Produk berhasil ditambahkan ke keranjang!");
-
-  }
+}
 
 
-  // ==================================
-  // UPDATE KERANJANG
-  // ==================================
+// ====================================
+// UPDATE KERANJANG
+// ====================================
 
-  function updateCartUI() {
+function updateCartUI() {
 
     const count = cart.reduce((sum, item) => sum + item.qty, 0);
 
@@ -654,200 +963,241 @@
     let total = 0;
 
     if (cart.length === 0) {
-      container.innerHTML =
-        `<p class="text-sm text-gray-400">Keranjang masih kosong.</p>`;
+
+        container.innerHTML = `
+            <p class="text-sm text-gray-400">
+                Keranjang masih kosong.
+            </p>
+        `;
+
     }
 
     cart.forEach((item, index) => {
 
-      total += Number(item.harga) * item.qty;
+        total += Number(item.harga) * item.qty;
 
-      container.innerHTML += `
+        container.innerHTML += `
 
-        <div class="flex justify-between items-center border-b pb-3">
+            <div class="flex justify-between items-center border-b pb-4">
 
-          <div>
-            <p class="font-semibold text-sm">${safe(item.nama)}</p>
+                <div>
 
-            <p class="text-xs text-gray-500 mt-1">
-              Rp${rupiah(item.harga)} x ${item.qty}
-            </p>
-          </div>
+                    <p class="font-semibold text-sm">
+                        ${safe(item.nama)}
+                    </p>
 
-          <div class="flex items-center gap-2">
+                    <p class="text-xs text-gray-500 mt-1">
+                        Rp${rupiah(item.harga)} x ${item.qty}
+                    </p>
 
-            <button onclick="changeQty(${index}, -1)"
-              class="border px-2">-</button>
+                </div>
 
-            <span class="text-sm">${item.qty}</span>
+                <div class="flex items-center gap-2">
 
-            <button onclick="changeQty(${index}, 1)"
-              class="border px-2">+</button>
+                    <button onclick="changeQty(${index}, -1)"
+                        class="border px-2 py-1">
+                        -
+                    </button>
 
-            <button onclick="removeItem(${index})"
-              class="text-red-500 text-xs ml-2">
-              Hapus
-            </button>
+                    <span class="text-sm">
+                        ${item.qty}
+                    </span>
 
-          </div>
+                    <button onclick="changeQty(${index}, 1)"
+                        class="border px-2 py-1">
+                        +
+                    </button>
 
-        </div>
+                    <button onclick="removeItem(${index})"
+                        class="text-red-500 text-xs ml-1">
+                        Hapus
+                    </button>
 
-      `;
+                </div>
+
+            </div>
+
+        `;
 
     });
 
     document.getElementById("cart-total").innerText =
-      "Rp " + rupiah(total);
+        "Rp " + rupiah(total);
 
-  }
+}
 
 
-  function changeQty(index, amount) {
+// ====================================
+// TAMBAH / KURANG JUMLAH
+// ====================================
+
+function changeQty(index, amount) {
+
+    if (!cart[index]) return;
 
     cart[index].qty += amount;
 
     if (cart[index].qty <= 0) {
-      cart.splice(index, 1);
+
+        cart.splice(index, 1);
+
     }
 
     updateCartUI();
 
-  }
+}
 
 
-  function removeItem(index) {
+// ====================================
+// HAPUS PRODUK
+// ====================================
+
+function removeItem(index) {
 
     cart.splice(index, 1);
 
     updateCartUI();
 
-  }
+}
 
 
-  // ==================================
-  // BUKA TUTUP KERANJANG
-  // ==================================
+// ====================================
+// BUKA TUTUP KERANJANG
+// ====================================
 
-  function toggleCart() {
+function toggleCart() {
 
     const modal = document.getElementById("cart-modal");
 
     modal.classList.toggle("hidden");
     modal.classList.toggle("flex");
 
-  }
+}
 
 
-  // ==================================
-  // CHECKOUT WHATSAPP
-  // ==================================
+// ====================================
+// CHECKOUT WHATSAPP
+// ====================================
 
-  async function handleCheckout(e) {
+function handleCheckout(e) {
 
     e.preventDefault();
 
     if (cart.length === 0) {
-      alert("Keranjang belanja masih kosong!");
-      return;
+
+        alert("Keranjang belanja masih kosong!");
+
+        return;
+
     }
 
     const btn = document.getElementById("btn-submit");
 
     btn.disabled = true;
+
     btn.innerText = "MEMPROSES PESANAN...";
+
 
     const invoice = "INV-" + Date.now().toString().slice(-6);
 
     const payload = {
 
-      nama: document.getElementById("cust-name").value,
-      whatsapp: document.getElementById("cust-phone").value,
-      alamat: document.getElementById("cust-address").value,
+        nama: document.getElementById("cust-name").value,
 
-      items: cart.map(item => ({
-        id: item.id,
-        nama: item.nama,
-        harga: item.harga,
-        qty: item.qty
-      })),
+        whatsapp: document.getElementById("cust-phone").value,
 
-      total: cart.reduce((sum, item) =>
-        sum + (Number(item.harga) * item.qty), 0)
+        alamat: document.getElementById("cust-address").value,
+
+        items: cart.map(item => ({
+            id: item.id,
+            nama: item.nama,
+            harga: item.harga,
+            qty: item.qty
+        })),
+
+        total: cart.reduce((sum, item) =>
+            sum + (Number(item.harga) * item.qty), 0)
 
     };
 
-    try {
 
-      // Simpan pesanan ke Google Sheets
-      if (!API_URL.includes("MASUKKAN_URL")) {
+    // BUAT PESAN WHATSAPP
 
-        fetch(API_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: {
-            "Content-Type": "text/plain"
-          },
-          body: JSON.stringify(payload)
-        }).catch(error => console.error(error));
+    let message = `Halo Admin HIJUP, saya ingin memesan produk.\n\n`;
 
-      }
+    message += `Invoice: ${invoice}\n`;
 
-      // Buat pesan WhatsApp
-      let message = `Halo Admin, saya ingin memesan produk.\n\n`;
+    message += `Nama: ${payload.nama}\n`;
 
-      message += `Invoice: ${invoice}\n`;
-      message += `Nama: ${payload.nama}\n`;
-      message += `WhatsApp: ${payload.whatsapp}\n`;
-      message += `Alamat: ${payload.alamat}\n\n`;
+    message += `WhatsApp: ${payload.whatsapp}\n`;
 
-      message += `DAFTAR PESANAN:\n`;
+    message += `Alamat: ${payload.alamat}\n\n`;
 
-      payload.items.forEach(item => {
+    message += `DAFTAR PESANAN:\n`;
+
+    payload.items.forEach(item => {
 
         message += `- ${item.nama}\n`;
-        message += `  ${item.qty} x Rp${rupiah(item.harga)}\n`;
 
-      });
+        message += `${item.qty} x Rp${rupiah(item.harga)}\n\n`;
 
-      message += `\nTOTAL: Rp${rupiah(payload.total)}\n\n`;
-      message += `Mohon informasi pembayaran dan ongkir. Terima kasih.`;
+    });
 
-      // Buka WhatsApp
-      const waLink =
+    message += `TOTAL PEMBAYARAN: Rp${rupiah(payload.total)}\n\n`;
+
+    message += `Mohon informasi pembayaran dan ongkir. Terima kasih.`;
+
+
+    // BUKA WHATSAPP
+
+    const waLink =
         "https://wa.me/" + WA_ADMIN +
         "?text=" + encodeURIComponent(message);
 
-      window.open(waLink, "_blank");
-
-      // Kosongkan keranjang
-      cart = [];
-
-      updateCartUI();
-
-      toggleCart();
-
-      document.getElementById("checkout-form").reset();
-
-    } catch (error) {
-
-      alert("Terjadi kesalahan. Silakan coba kembali.");
-
-    } finally {
-
-      btn.disabled = false;
-      btn.innerText = "BELI SEKARANG VIA WHATSAPP";
-
-    }
-
-  }
+    window.open(waLink, "_blank");
 
 
-  // ==================================
-  // JALANKAN WEBSITE
-  // ==================================
+    // KIRIM PESANAN KE GOOGLE SHEETS
 
-  loadProducts();
+    fetch(API_URL, {
+
+        method: "POST",
+
+        mode: "no-cors",
+
+        headers: {
+            "Content-Type": "text/plain"
+        },
+
+        body: JSON.stringify(payload)
+
+    }).catch(error => console.error("Gagal mengirim data:", error));
+
+
+    // RESET KERANJANG
+
+    cart = [];
+
+    updateCartUI();
+
+    toggleCart();
+
+    document.getElementById("checkout-form").reset();
+
+    btn.disabled = false;
+
+    btn.innerText = "BELI SEKARANG VIA WHATSAPP";
+
+}
+
+
+// ====================================
+// JALANKAN WEBSITE
+// ====================================
+
+updateCartUI();
+
+loadProducts();
 
 </script>
 
