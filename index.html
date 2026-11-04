@@ -1,0 +1,855 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HIJUP - Fashion Muslim Store</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: white;
+      color: #111;
+    }
+
+    .serif {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 390px;
+      object-fit: cover;
+      background: #eee;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.025);
+    }
+
+    .product-image {
+      transition: transform .4s ease;
+    }
+
+    .social-float {
+      position: fixed;
+      right: 25px;
+      bottom: 25px;
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .social-float a {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      box-shadow: 0 3px 10px #0002;
+    }
+
+    .wa {
+      background: #000;
+    }
+
+    .ig {
+      background: #c13584;
+    }
+
+    .nav-link {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .3px;
+      white-space: nowrap;
+    }
+
+    .heart.active {
+      color: red;
+    }
+
+    @media(max-width: 640px) {
+      .product-image {
+        height: 260px;
+      }
+
+      .social-float {
+        right: 15px;
+        bottom: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="bg-white sticky top-0 z-40 border-b border-gray-200">
+
+  <div class="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between gap-4">
+
+    <a href="#" class="serif text-3xl tracking-widest font-semibold">
+      HIJUP
+    </a>
+
+    <!-- SEARCH -->
+    <div class="hidden md:flex items-center flex-1 max-w-md ml-8 border-b border-gray-300 py-2">
+      <span class="mr-3 text-gray-500">⌕</span>
+      <input
+        type="text"
+        id="search"
+        placeholder="Cari produk atau brand"
+        class="w-full outline-none text-sm"
+        oninput="searchProducts()">
+    </div>
+
+    <!-- ICON HEADER -->
+    <div class="flex items-center gap-5">
+
+      <button onclick="showFavorites()" title="Favorit"
+        class="text-2xl">
+        ♡
+      </button>
+
+      <button onclick="toggleCart()" title="Keranjang"
+        class="text-2xl relative">
+        ♧
+        <span id="cart-count"
+          class="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+          0
+        </span>
+      </button>
+
+      <button onclick="toggleCart()"
+        class="hidden sm:block bg-black text-white px-6 py-2 text-xs font-semibold">
+        LOGIN / REGISTER
+      </button>
+
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav class="border-t border-gray-100">
+    <div class="max-w-7xl mx-auto flex items-center justify-center gap-5 md:gap-9 py-3 px-3 overflow-x-auto">
+
+      <a href="#products" class="nav-link">PRODUCTS</a>
+      <a href="#promo" class="nav-link">PROMO⌄</a>
+      <a href="#products" class="nav-link">NEW ARRIVALS</a>
+      <a href="#products" class="nav-link text-red-500">SALE</a>
+      <a href="#brands" class="nav-link">BRANDS⌄</a>
+      <a href="#exclusive" class="nav-link">HIJUP EXCLUSIVE⌄</a>
+      <a href="#footer" class="nav-link">MAGAZINE</a>
+
+    </div>
+  </nav>
+
+</header>
+
+
+<!-- MAIN CONTENT -->
+<main class="max-w-7xl mx-auto px-5 py-7">
+
+  <!-- MOBILE SEARCH -->
+  <div class="md:hidden mb-6 border-b border-gray-300 py-2 flex">
+    <input
+      type="text"
+      id="mobile-search"
+      placeholder="Cari produk atau brand"
+      class="w-full outline-none text-sm"
+      oninput="searchMobile()">
+    <span>⌕</span>
+  </div>
+
+  <!-- TITLE -->
+  <section id="products">
+
+    <div class="flex justify-between items-center mb-5">
+      <h2 class="serif text-xl md:text-2xl font-semibold">
+        Produk Terpopuler
+      </h2>
+
+      <a href="#products" class="text-xs font-semibold">
+        LIHAT SEMUA
+      </a>
+    </div>
+
+    <!-- LOADING -->
+    <div id="product-loading" class="text-center py-16 text-gray-500">
+      <p>Memuat katalog produk...</p>
+    </div>
+
+    <!-- PRODUCT GRID -->
+    <div id="product-grid"
+      class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-7 hidden">
+    </div>
+
+  </section>
+
+
+  <!-- PROMO BANNER -->
+  <section id="promo" class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-4">
+
+    <div class="bg-[#a77a75] min-h-48 flex items-center justify-center text-white text-center p-8">
+      <div>
+        <h2 class="serif text-3xl mb-2">HIJUP</h2>
+        <p class="text-sm tracking-widest">SPECIAL COLLECTION</p>
+      </div>
+    </div>
+
+    <div class="bg-[#a9655c] min-h-48 flex items-center justify-center text-white text-center p-8">
+      <div>
+        <h2 class="serif text-3xl mb-2">NEW ARRIVALS</h2>
+        <p class="text-sm tracking-widest">DISCOVER YOUR STYLE</p>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- BRAND -->
+  <section id="brands" class="text-center py-14">
+    <h2 class="serif text-2xl mb-3">Our Collection</h2>
+    <p class="text-sm text-gray-500">
+      Temukan koleksi hijab dan fashion muslim pilihan terbaik.
+    </p>
+  </section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer id="footer" class="bg-black text-white py-12 px-5">
+
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+
+    <div>
+      <h2 class="serif text-3xl tracking-widest mb-4">HIJUP</h2>
+      <p class="text-xs text-gray-300 leading-6">
+        Temukan gaya fashion muslim yang elegan,
+        modern, dan nyaman untuk setiap kesempatan.
+      </p>
+    </div>
+
+    <div>
+      <h3 class="font-semibold mb-4">INFORMASI</h3>
+      <div class="text-xs text-gray-300 space-y-3">
+        <p><a href="#products">Produk Kami</a></p>
+        <p><a href="#promo">Promo</a></p>
+        <p><a href="#brands">Brand</a></p>
+        <p><a href="#footer">Tentang Kami</a></p>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="font-semibold mb-4">HUBUNGI KAMI</h3>
+
+      <div class="text-xs text-gray-300 space-y-3">
+
+        <p>
+          Instagram:
+          <a href="https://www.instagram.com/saufiani150/"
+             target="_blank"
+             class="text-pink-300 hover:underline">
+            @saufiani150
+          </a>
+        </p>
+
+        <p>
+          WhatsApp:
+          <a href="https://wa.me/6281234567890"
+             target="_blank"
+             class="text-green-300 hover:underline">
+            Hubungi Admin
+          </a>
+        </p>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="max-w-7xl mx-auto border-t border-gray-700 mt-10 pt-5 text-center">
+    <p class="text-xs text-gray-400">
+      © 2026 HIJUP Fashion Store. All rights reserved.
+    </p>
+  </div>
+
+</footer>
+
+
+<!-- FLOATING SOCIAL MEDIA -->
+<div class="social-float">
+
+  <!-- INSTAGRAM -->
+  <a href="https://www.instagram.com/saufiani150/"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="ig"
+     title="Instagram">
+
+    <svg width="25" height="25" viewBox="0 0 24 24"
+      fill="none" stroke="white" stroke-width="2">
+      <rect x="3" y="3" width="18" height="18" rx="5"/>
+      <circle cx="12" cy="12" r="4"/>
+      <circle cx="18" cy="6" r="1" fill="white"/>
+    </svg>
+
+  </a>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/6281234567890"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="wa"
+     title="WhatsApp">
+
+    <svg width="26" height="26" viewBox="0 0 24 24"
+      fill="none" stroke="white" stroke-width="1.8">
+      <path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.2-5.1A8.5 8.5 0 1 1 21 11.5Z"/>
+      <path d="M9 8.5c.5 2.5 2 4 4.5 5l1.3-1.2 2 1c-.2 1.5-1.3 2.2-2.5 2.2-3.7-.5-7-3.8-7.5-7.5 0-1.2.7-2.3 2.2-2.5l1 2Z"/>
+    </svg>
+
+  </a>
+
+</div>
+
+
+<!-- CART MODAL -->
+<div id="cart-modal"
+  class="fixed inset-0 bg-black/50 z-50 hidden justify-end">
+
+  <div class="bg-white w-full max-w-md h-full p-6 flex flex-col overflow-y-auto">
+
+    <div class="flex justify-between items-center border-b pb-4">
+      <h2 class="serif text-xl font-semibold">Keranjang Belanja</h2>
+
+      <button onclick="toggleCart()" class="text-3xl">
+        &times;
+      </button>
+    </div>
+
+    <div id="cart-items" class="flex-1 py-5 space-y-3">
+      <p class="text-sm text-gray-400">Keranjang masih kosong.</p>
+    </div>
+
+    <div class="border-t pt-5">
+
+      <div class="flex justify-between font-bold mb-5">
+        <span>Total:</span>
+        <span id="cart-total">Rp 0</span>
+      </div>
+
+      <form id="checkout-form" onsubmit="handleCheckout(event)">
+
+        <input id="cust-name"
+          type="text"
+          required
+          placeholder="Nama Lengkap"
+          class="w-full border p-3 mb-3 text-sm outline-none">
+
+        <input id="cust-phone"
+          type="tel"
+          required
+          placeholder="Nomor WhatsApp"
+          class="w-full border p-3 mb-3 text-sm outline-none">
+
+        <textarea id="cust-address"
+          required
+          placeholder="Alamat Lengkap"
+          class="w-full border p-3 mb-4 text-sm outline-none"
+          rows="3"></textarea>
+
+        <button type="submit"
+          id="btn-submit"
+          class="w-full bg-black text-white py-3 text-sm font-semibold hover:bg-gray-800">
+          BELI SEKARANG VIA WHATSAPP
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- JAVASCRIPT -->
+<script>
+
+  // ==================================
+  // PENGATURAN WEBSITE
+  // ==================================
+
+  // Masukkan URL Google Apps Script
+  const API_URL = "https://script.google.com/macros/s/AKfycbxRZJlEsSOBV0htByoGVbl5gUPP1XtSmra9aaKFiQ3-1He7td8UdSCN_Ep7mS-SHVaE/exec";
+
+  // Ganti dengan nomor WhatsApp Admin
+  // Format: 628xxxxxxxxxx
+  const WA_ADMIN = "6287844263501";
+
+  // Instagram toko
+  const IG_URL = "https://www.instagram.com/saufiani150/";
+
+  let products = [];
+  let cart = [];
+  let favorites = [];
+
+
+  // ==================================
+  // FORMAT RUPIAH
+  // ==================================
+
+  function rupiah(number) {
+    return Number(number || 0).toLocaleString("id-ID");
+  }
+
+
+  // ==================================
+  // LOAD PRODUK GOOGLE SHEETS
+  // ==================================
+
+  async function loadProducts() {
+
+    try {
+
+      if (API_URL.includes("MASUKKAN_URL")) {
+        throw new Error("URL API belum diatur");
+      }
+
+      const response = await fetch(API_URL);
+      if (!response.ok) throw new Error("Gagal mengambil data");
+
+      const json = await response.json();
+
+      products = json.data || [];
+
+      renderProducts();
+
+    } catch (error) {
+
+      document.getElementById("product-loading").innerHTML =
+        `<p class="text-gray-500 text-sm">
+          Katalog belum dapat dimuat.
+          Silakan periksa koneksi Google Sheets dan URL API.
+        </p>`;
+
+    }
+
+  }
+
+
+  // ==================================
+  // AMANKAN TEKS DARI DATABASE
+  // ==================================
+
+  function safe(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[char]);
+  }
+
+
+  // ==================================
+  // TAMPILKAN PRODUK
+  // ==================================
+
+  function renderProducts(data = products) {
+
+    const grid = document.getElementById("product-grid");
+
+    grid.innerHTML = "";
+
+    if (data.length === 0) {
+      grid.innerHTML =
+        `<p class="col-span-full text-center text-sm text-gray-500">
+          Produk belum tersedia.
+        </p>`;
+    }
+
+    data.forEach(p => {
+
+      const image = safe(p.foto || "https://placehold.co/400x500?text=Product");
+      const name = safe(p.nama);
+      const category = safe(p.kategori || "Fashion");
+      const id = JSON.stringify(String(p.id)).replace(/</g, "\\u003c");
+      const favorite = favorites.includes(String(p.id));
+
+      grid.innerHTML += `
+
+        <div class="product-card group">
+
+          <div class="relative overflow-hidden bg-gray-100">
+
+            <img
+              src="${image}"
+              alt="${name}"
+              class="product-image"
+              loading="lazy"
+              onerror="this.src='https://placehold.co/400x500?text=Product'">
+
+            <button
+              onclick='toggleFavorite(${id})'
+              class="heart absolute top-3 right-3 text-3xl bg-white/80 rounded-full w-9 h-9 flex items-center justify-center ${favorite ? "active" : ""}">
+              ${favorite ? "♥" : "♡"}
+            </button>
+
+            <button
+              onclick='addToCart(${id})'
+              class="absolute bottom-3 left-3 right-3 bg-white py-3 text-xs font-semibold tracking-wide opacity-95 hover:bg-black hover:text-white transition">
+              + TAMBAH KE KERANJANG
+            </button>
+
+          </div>
+
+          <div class="pt-3">
+
+            <p class="text-xs font-semibold mb-1">
+              Rp${rupiah(p.harga)}
+            </p>
+
+            <h3 class="text-sm font-medium leading-5">
+              ${name}
+            </h3>
+
+            <p class="serif text-sm text-gray-500 mt-1">
+              ${category}
+            </p>
+
+          </div>
+
+        </div>
+
+      `;
+
+    });
+
+    document.getElementById("product-loading").classList.add("hidden");
+    grid.classList.remove("hidden");
+
+  }
+
+
+  // ==================================
+  // PENCARIAN PRODUK
+  // ==================================
+
+  function searchProducts() {
+
+    const keyword = document.getElementById("search").value.toLowerCase();
+
+    const result = products.filter(p =>
+      String(p.nama || "").toLowerCase().includes(keyword) ||
+      String(p.kategori || "").toLowerCase().includes(keyword)
+    );
+
+    renderProducts(result);
+
+  }
+
+  function searchMobile() {
+
+    const keyword = document.getElementById("mobile-search").value.toLowerCase();
+
+    const result = products.filter(p =>
+      String(p.nama || "").toLowerCase().includes(keyword) ||
+      String(p.kategori || "").toLowerCase().includes(keyword)
+    );
+
+    renderProducts(result);
+
+  }
+
+
+  // ==================================
+  // FAVORIT
+  // ==================================
+
+  function toggleFavorite(id) {
+
+    id = String(id);
+
+    if (favorites.includes(id)) {
+      favorites = favorites.filter(item => item !== id);
+    } else {
+      favorites.push(id);
+    }
+
+    renderProducts();
+
+  }
+
+  function showFavorites() {
+
+    const result = products.filter(p =>
+      favorites.includes(String(p.id))
+    );
+
+    renderProducts(result);
+
+    document.getElementById("products").scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
+
+
+  // ==================================
+  // TAMBAH KE KERANJANG
+  // ==================================
+
+  function addToCart(id) {
+
+    const product = products.find(p => String(p.id) === String(id));
+
+    if (!product) return;
+
+    const exist = cart.find(item => String(item.id) === String(id));
+
+    if (exist) {
+      exist.qty++;
+    } else {
+      cart.push({
+        ...product,
+        qty: 1
+      });
+    }
+
+    updateCartUI();
+
+    alert("Produk berhasil ditambahkan ke keranjang!");
+
+  }
+
+
+  // ==================================
+  // UPDATE KERANJANG
+  // ==================================
+
+  function updateCartUI() {
+
+    const count = cart.reduce((sum, item) => sum + item.qty, 0);
+
+    document.getElementById("cart-count").innerText = count;
+
+    const container = document.getElementById("cart-items");
+
+    container.innerHTML = "";
+
+    let total = 0;
+
+    if (cart.length === 0) {
+      container.innerHTML =
+        `<p class="text-sm text-gray-400">Keranjang masih kosong.</p>`;
+    }
+
+    cart.forEach((item, index) => {
+
+      total += Number(item.harga) * item.qty;
+
+      container.innerHTML += `
+
+        <div class="flex justify-between items-center border-b pb-3">
+
+          <div>
+            <p class="font-semibold text-sm">${safe(item.nama)}</p>
+
+            <p class="text-xs text-gray-500 mt-1">
+              Rp${rupiah(item.harga)} x ${item.qty}
+            </p>
+          </div>
+
+          <div class="flex items-center gap-2">
+
+            <button onclick="changeQty(${index}, -1)"
+              class="border px-2">-</button>
+
+            <span class="text-sm">${item.qty}</span>
+
+            <button onclick="changeQty(${index}, 1)"
+              class="border px-2">+</button>
+
+            <button onclick="removeItem(${index})"
+              class="text-red-500 text-xs ml-2">
+              Hapus
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    });
+
+    document.getElementById("cart-total").innerText =
+      "Rp " + rupiah(total);
+
+  }
+
+
+  function changeQty(index, amount) {
+
+    cart[index].qty += amount;
+
+    if (cart[index].qty <= 0) {
+      cart.splice(index, 1);
+    }
+
+    updateCartUI();
+
+  }
+
+
+  function removeItem(index) {
+
+    cart.splice(index, 1);
+
+    updateCartUI();
+
+  }
+
+
+  // ==================================
+  // BUKA TUTUP KERANJANG
+  // ==================================
+
+  function toggleCart() {
+
+    const modal = document.getElementById("cart-modal");
+
+    modal.classList.toggle("hidden");
+    modal.classList.toggle("flex");
+
+  }
+
+
+  // ==================================
+  // CHECKOUT WHATSAPP
+  // ==================================
+
+  async function handleCheckout(e) {
+
+    e.preventDefault();
+
+    if (cart.length === 0) {
+      alert("Keranjang belanja masih kosong!");
+      return;
+    }
+
+    const btn = document.getElementById("btn-submit");
+
+    btn.disabled = true;
+    btn.innerText = "MEMPROSES PESANAN...";
+
+    const invoice = "INV-" + Date.now().toString().slice(-6);
+
+    const payload = {
+
+      nama: document.getElementById("cust-name").value,
+      whatsapp: document.getElementById("cust-phone").value,
+      alamat: document.getElementById("cust-address").value,
+
+      items: cart.map(item => ({
+        id: item.id,
+        nama: item.nama,
+        harga: item.harga,
+        qty: item.qty
+      })),
+
+      total: cart.reduce((sum, item) =>
+        sum + (Number(item.harga) * item.qty), 0)
+
+    };
+
+    try {
+
+      // Simpan pesanan ke Google Sheets
+      if (!API_URL.includes("MASUKKAN_URL")) {
+
+        fetch(API_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "text/plain"
+          },
+          body: JSON.stringify(payload)
+        }).catch(error => console.error(error));
+
+      }
+
+      // Buat pesan WhatsApp
+      let message = `Halo Admin, saya ingin memesan produk.\n\n`;
+
+      message += `Invoice: ${invoice}\n`;
+      message += `Nama: ${payload.nama}\n`;
+      message += `WhatsApp: ${payload.whatsapp}\n`;
+      message += `Alamat: ${payload.alamat}\n\n`;
+
+      message += `DAFTAR PESANAN:\n`;
+
+      payload.items.forEach(item => {
+
+        message += `- ${item.nama}\n`;
+        message += `  ${item.qty} x Rp${rupiah(item.harga)}\n`;
+
+      });
+
+      message += `\nTOTAL: Rp${rupiah(payload.total)}\n\n`;
+      message += `Mohon informasi pembayaran dan ongkir. Terima kasih.`;
+
+      // Buka WhatsApp
+      const waLink =
+        "https://wa.me/" + WA_ADMIN +
+        "?text=" + encodeURIComponent(message);
+
+      window.open(waLink, "_blank");
+
+      // Kosongkan keranjang
+      cart = [];
+
+      updateCartUI();
+
+      toggleCart();
+
+      document.getElementById("checkout-form").reset();
+
+    } catch (error) {
+
+      alert("Terjadi kesalahan. Silakan coba kembali.");
+
+    } finally {
+
+      btn.disabled = false;
+      btn.innerText = "BELI SEKARANG VIA WHATSAPP";
+
+    }
+
+  }
+
+
+  // ==================================
+  // JALANKAN WEBSITE
+  // ==================================
+
+  loadProducts();
+
+</script>
+
+</body>
+</html>
